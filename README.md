@@ -1,5 +1,8 @@
 # mingyan
-scrapy爬虫抓取数据
+scrapy爬虫抓取数据，grafana分析数据
+
+###结合Grafana分析数据
+
 
 ### 项目涉及scrapy的知识点：
 #### 1.爬虫模拟浏览器行为

@@ -8,7 +8,7 @@ scrapy爬虫抓取数据，grafana分析数据
 ![image2](https://github.com/BLiYing/mingyan/blob/master/images/WX20200620-135457@2x.png)
 #### 此种图叫HeatMap图，可以分析一个区间内多层次的信息。从颜色可以看出成交频次，白色方块是最热，可以得知成交频次最高的时间段。（意味着什么？）
 ![image3](https://github.com/BLiYing/mingyan/blob/master/images/WX20200620-135536@2x.png)
-
+![image3](https://github.com/BLiYing/mingyan/blob/master/images/WX20200620-141508@2x.png)
 
 ### 项目涉及scrapy的知识点：
 #### 1.爬虫模拟浏览器行为

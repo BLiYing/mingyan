@@ -18,7 +18,7 @@ class WeatherSpider(scrapy.Spider):
     start_urls = ['https://wh.ke.com/']
 
     def start_requests(self):
-        for i in range(1, 5):
+        for i in range(1, 2):
             #
             # 江岸区：成交100-200万，5年以内
             # url = self.start_urls[0] + "chengjiao/jiangan" + "/" + "pg" + str(i) + "y1p3p4/"

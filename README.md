@@ -3,6 +3,8 @@ scrapy爬虫抓取数据，grafana分析数据
 
 ###结合Grafana分析数据
 ![image1](https://github.com/BLiYing/mingyan/blob/master/images/WX20200620-135303%402x.png)
+![image2](https://github.com/BLiYing/mingyan/blob/master/images/WX20200620-135457@2x.png)
+![image3](https://github.com/BLiYing/mingyan/blob/master/images/WX20200620-135536@2x.png)
 
 
 ### 项目涉及scrapy的知识点：

@@ -28,5 +28,23 @@ def get_ip():
     print(ip_bean['data']['data'][0]['unique_id'])
 
 
+def is_number(s):
+    try:
+        float(s)
+        return True
+    except ValueError:
+        pass
+
+    try:
+        import unicodedata
+        unicodedata.numeric(s)
+        return True
+    except (TypeError, ValueError):
+        pass
+
+    return False
+
+
 if __name__ == "__main__":
-    get_ip()
+    # get_ip()
+    print(is_number('400-500'))

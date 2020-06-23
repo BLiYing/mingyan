@@ -1,3 +1,4 @@
+import traceback
 from decimal import Decimal
 
 import scrapy
@@ -5,12 +6,13 @@ import scrapy
 from mingyan.items import MingyanItem
 # 打开数据库连接
 #from test import time_mk
+from mingyan.util.minyanitem import getMinyanItem
 
 city_name = '北京'
-area = 'dongcheng'
+area = 'fengtai'
 #根据面积查找 hanyang/a3a4a5a6a7/ https://wh.ke.com/chengjiao/qingshan/
 tiaojian = ''
-end_page = 101
+end_page = 54
 
 
 
@@ -21,7 +23,7 @@ class WeatherSpider(scrapy.Spider):
     start_urls = ['https://bj.ke.com/']
 
     def start_requests(self):
-        for i in range(30, end_page):
+        for i in range(53, end_page):
             #
             # 江岸区：成交100-200万，5年以内
             # url = self.start_urls[0] + "chengjiao/jiangan" + "/" + "pg" + str(i) + "y1p3p4/"
@@ -124,31 +126,8 @@ class WeatherSpider(scrapy.Spider):
             flag = size_house_age == size * 2
 
             for i in range(size):
-                item = MingyanItem()
-                href_str = ListMaidian[i]
-                new_str = getId(href_str)
-                item['maidian_id'] = new_str
-                community_name = ListTitle[i]
-                item['community_name'] = community_name
-                chengjiao_dealDate_str = str(ListdealDate[i]).replace(' ', '').replace('\n', '').replace('\r', '')
-                item['chengjiao_dealDate'] = time_mk(chengjiao_dealDate_str)
-                item['chengjiao_totalPrice'] = ListtotalPrice[i]
-                item['chengjiao_unitPrice'] = ListUnitPrice[i]
-                item['xiaoqu_name'] = getXiaquName(community_name)
-
-                guapai_price_str = ListGuapai_price[i]
-                item['guapai_price'] = str(guapai_price_str).replace('挂牌', '').replace('万', '').replace(' ', '')
-                dealcycle_date_str = Listdealcycle_date[i]
-                item['dealcycle_date'] = str(dealcycle_date_str).replace('成交周期', '').replace('天', '').replace(' ', '')
-                item['kanjia_price'] = Decimal(item['guapai_price']) - Decimal(item['chengjiao_totalPrice'])
-                item['area'] = area
-                if flag:
-                    house_age = getAge(ListHouseAge[2 * i + 1])
-                else:
-                    house_age = ''
-
-                item['house_age'] = house_age
-                item['city_name'] = city_name
+                item = getMinyanItem(i, ListMaidian, ListTitle, ListdealDate, ListtotalPrice, ListUnitPrice, ListGuapai_price,
+                  Listdealcycle_date, ListHouseAge, flag, area, city_name)
 
                 yield item
 

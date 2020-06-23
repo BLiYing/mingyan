@@ -1,4 +1,5 @@
 import time
+import traceback
 from decimal import Decimal
 
 import scrapy
@@ -7,10 +8,11 @@ from mingyan.items import MingyanItem
 
 # 打开数据库连接
 # from test import time_mk
+from mingyan.util.minyanitem import getMinyanItem
 
 city_name = '北京'
 tiaojian = '/'
-end_page = 50
+end_page = 60
 
 
 class WeatherSpider(scrapy.Spider):
@@ -29,9 +31,10 @@ class WeatherSpider(scrapy.Spider):
             '//*[@data-role="ershoufang"]/div[1]/a[@class=" CLICKDATA"]/@href').extract()
         for j in range(len(select_area_href_list_first)):
             # 武汉二手房：https://wh.ke.com/chengjiao/pg2/
-            for i in range(1, end_page):
+            for i in range(51, end_page):
                 url = self.start_urls[0] + select_area_href_list_first[j] + "pg" + str(i) + tiaojian
                 print("请求url:" + url)
+                # time.sleep(0.5)
                 yield scrapy.Request(url=url, callback=self.parse_first)
 
     def parse_first(self, response):
@@ -68,31 +71,9 @@ class WeatherSpider(scrapy.Spider):
             flag = size_house_age == size * 2
 
             for i in range(size):
-                item = MingyanItem()
-                href_str = ListMaidian[i]
-                new_str = getId(href_str)
-                item['maidian_id'] = new_str
-                community_name = ListTitle[i]
-                item['community_name'] = community_name
-                chengjiao_dealDate_str = str(ListdealDate[i]).replace(' ', '').replace('\n', '').replace('\r', '')
-                item['chengjiao_dealDate'] = time_mk(chengjiao_dealDate_str)
-                item['chengjiao_totalPrice'] = ListtotalPrice[i]
-                item['chengjiao_unitPrice'] = ListUnitPrice[i]
-                item['xiaoqu_name'] = getXiaquName(community_name)
-
-                guapai_price_str = ListGuapai_price[i]
-                item['guapai_price'] = str(guapai_price_str).replace('挂牌', '').replace('万', '').replace(' ', '')
-                dealcycle_date_str = Listdealcycle_date[i]
-                item['dealcycle_date'] = str(dealcycle_date_str).replace('成交周期', '').replace('天', '').replace(' ', '')
-                item['kanjia_price'] = Decimal(item['guapai_price']) - Decimal(item['chengjiao_totalPrice'])
-                item['area'] = area
-                if flag:
-                    house_age = getAge(ListHouseAge[2 * i + 1])
-                else:
-                    house_age = ''
-
-                item['house_age'] = house_age
-                item['city_name'] = city_name
+                item = getMinyanItem(i, ListMaidian, ListTitle, ListdealDate, ListtotalPrice, ListUnitPrice,
+                                     ListGuapai_price,
+                                     Listdealcycle_date, ListHouseAge, flag, area, city_name)
 
                 yield item
 

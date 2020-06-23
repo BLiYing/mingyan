@@ -49,8 +49,8 @@ def crawl_ips():
 def get_ip():
     # coding:utf-8
     url = "https://ip.jiangxianli.com/api/proxy_ips"
-    for i in range(5):
-        data = {"page": i, "country": "中国", "isp": "电信,阿里云,联通,移动"}  # "order_by": "", "":"",
+    for i in range(1, 10):
+        data = {"page": i, "country": "中国"}  #
         # 使用urlencode这个方法将字典序列化成字符串，最后和基础网址进行拼接
         data_string = parse.urlencode(data)
         # req = request.Request(url, headers=headers, data=data)  # POST方法
@@ -97,7 +97,7 @@ def get_ip():
                         ip_info[0], ip_info[1], ip_info[2], ip_info[3], ip_info[4])
                     )
                     conn.commit()
-        time.sleep(5)
+        time.sleep(2)
 
 
 class GetIP(object):
@@ -112,19 +112,21 @@ class GetIP(object):
 
     def judge_ip(self, ip, port):
         # 判断ip是否可用
-        http_url = "https://wh.ke.com/chengjiao/donghugaoxin"
+        http_url = "https://www.baidu.com"
         proxy_url = "http://{0}:{1}".format(ip, port)
         try:
             proxy_dict = {
                 "http": proxy_url,
             }
             response = requests.get(http_url, proxies=proxy_dict)
+
         except Exception as e:
             print("invalid ip and port")
             self.delete_ip(ip)
             return False
         else:
             code = response.status_code
+            # select_area_list_index = response.text.find('class=" CLICKDATA"')
             if code >= 200 and code < 300:
                 print("effective ip")
                 return True

@@ -22,7 +22,8 @@ class MingyanItem(scrapy.Item):
     dealcycle_date = scrapy.Field()
     kanjia_price = scrapy.Field()
     area = scrapy.Field() # 区域
-    house_age = scrapy.Field() # 区域
+    house_age = scrapy.Field() # 楼龄
+    city_name = scrapy.Field() # 城市
     pass
 
 

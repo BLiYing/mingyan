@@ -1,41 +1,47 @@
+import time
 from decimal import Decimal
 
 import scrapy
 
 from mingyan.items import MingyanItem
 
-city_name = '武汉'
-area = ''
-#根据面积查找2768
-tiaojian = ''
-end_page = 2
+# 打开数据库连接
+# from test import time_mk
 
+city_name = '北京'
+tiaojian = '/'
+end_page = 50
 
 
 class WeatherSpider(scrapy.Spider):
     # https://sz.ke.com/chengjiao/nanshanqu/pg2/
-    name = "beike_b"
-    allowed_domains = ["wh.ke.com"]
-    start_urls = ['https://wh.ke.com/']
-
-
+    name = "beike_all_area_of_chengjiao_by_city"
+    allowed_domains = ["bj.ke.com"]
+    start_urls = ['https://bj.ke.com']
 
     def start_requests(self):
+        # 武汉二手房：https://wh.ke.com/chengjiao/pg2/
+        url = self.start_urls[0] + "/chengjiao/"
+        yield scrapy.Request(url=url, callback=self.parse_a)
 
-        for i in range(1, end_page):
+    def parse_a(self, response):
+        select_area_href_list_first = response.xpath(
+            '//*[@data-role="ershoufang"]/div[1]/a[@class=" CLICKDATA"]/@href').extract()
+        for j in range(len(select_area_href_list_first)):
             # 武汉二手房：https://wh.ke.com/chengjiao/pg2/
-            url = self.start_urls[0] + "chengjiao/" + area + "/" + "pg" + str(i) + tiaojian
-            print("请求url:" + url)
-            yield scrapy.Request(url=url)
+            for i in range(1, end_page):
+                url = self.start_urls[0] + select_area_href_list_first[j] + "pg" + str(i) + tiaojian
+                print("请求url:" + url)
+                yield scrapy.Request(url=url, callback=self.parse_first)
 
-    def parse(self, response):
-        if response is None:
-            return
+    def parse_first(self, response):
+
         select_area_list = response.xpath(
             '//*[@data-role="ershoufang"]/div[1]/a[@class="selected CLICKDATA"]/text()').extract()
-        if select_area_list is not None and isinstance(select_area_list, list) and len(select_area_list) == 1:
+        if  isinstance(select_area_list, list) and len(select_area_list) == 1:
             area = select_area_list[0]
             area = area.replace(' ', '').replace('\n', '')
+
             common_str = '//*[@data-component="list"]/ul/li/div[@class="info"]'
             ListTitle = response.xpath(
                 common_str + '/div[@class="title"]/a/text()').extract()
@@ -57,10 +63,6 @@ class WeatherSpider(scrapy.Spider):
             Listdealcycle_date = response.xpath(
                 common_str + '/div[@class="dealCycleeInfo"]/span[@class="dealCycleTxt"][1]/span[2]/text()').extract()
 
-            # SQL 插入语句
-            # sql = ' INSERT IGNORE INTO beike_inner_5years_100_200 (id,community_name,chengjiao_dealDate,chengjiao_totalPrice,chengjiao_unitPrice) VALUES '
-            # sql = ' INSERT IGNORE INTO beike_ja_shgg (id,community_name,chengjiao_dealDate,chengjiao_totalPrice,chengjiao_unitPrice, xiaoqu_name, guapai_price, dealcycle_date, kanjia_price) VALUES '
-            # sql = ' INSERT IGNORE INTO beike_sz_nanshanqu (id, community_name, chengjiao_dealDate, chengjiao_totalPrice, chengjiao_unitPrice) VALUES '
             size = len(ListTitle)
             size_house_age = len(ListHouseAge)
             flag = size_house_age == size * 2
@@ -129,6 +131,7 @@ def getAge(a):
         return b
     else:
         return ''
+
 
 def time_mk(time):
     if str(time).__contains__('.'):

@@ -15,9 +15,10 @@ class MingyanPipeline:
 
     ershoufanglist = []
     global sql_insert
-    sql_insert = " INSERT IGNORE INTO beike_ershoufang_wh (id, community_name, chengjiao_dealDate, chengjiao_totalPrice, chengjiao_unitPrice, xiaoqu_name, guapai_price, dealcycle_date, kanjia_price, area, house_age) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s) "
+    sql_insert = " INSERT IGNORE INTO beike_ershoufang_wh (id, community_name, chengjiao_dealDate, chengjiao_totalPrice, chengjiao_unitPrice, xiaoqu_name, guapai_price, dealcycle_date, kanjia_price, area, house_age, city_name) " \
+                 "VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s) "
 
-    # sql_delete = """ DELETE FROM beike_ershoufang_wh WHERE id=%s """
+    # sql_delete = """ DELETE FROM table_name WHERE id=%s """
     global sql_update
     sql_update = " UPDATE beike_ershoufang_wh SET area=%s,house_age=%s WHERE id=%s "
 
@@ -39,9 +40,9 @@ class MingyanPipeline:
             self.__pool.end("commit")
             if count is not None and isinstance(count, tuple) and len(count) > 0 and count[0] > 0:
                 print("------------------------------更新area" + str(item['maidian_id']))
-                params_update = (item['area'], item['house_age'], item['maidian_id'])
-                self.__pool.update(sql=sql_update, param=params_update)
-                self.__pool.end("commit")
+                # params_update = (item['area'], item['house_age'], item['maidian_id'])
+                # self.__pool.update(sql=sql_update, param=params_update)
+                # self.__pool.end("commit")
 
             else:
                 print("------------------------------插入" + str(item['maidian_id']))
@@ -55,7 +56,8 @@ class MingyanPipeline:
                                             item['dealcycle_date'],
                                             item['kanjia_price'],
                                             item['area'],
-                                            item['house_age']])
+                                            item['house_age'],
+                                            item['city_name']])
 
                 # 删除
                 # params = {item['maidian_id']}

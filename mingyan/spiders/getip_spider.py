@@ -12,7 +12,7 @@ class WeatherSpider(scrapy.Spider):
 
     def start_requests(self):
 
-        for i in range(1, 10):
+        for i in range(1, 2):
             url = self.start_urls[0]
             yield scrapy.Request(url=url)
 

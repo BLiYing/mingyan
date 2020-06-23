@@ -6,19 +6,22 @@ from mingyan.items import MingyanItem
 # 打开数据库连接
 #from test import time_mk
 
-area = 'donghugaoxin'
+city_name = '北京'
+area = 'dongcheng'
 #根据面积查找 hanyang/a3a4a5a6a7/ https://wh.ke.com/chengjiao/qingshan/
-tiaojian = 'a3/'
+tiaojian = ''
+end_page = 101
+
 
 
 class WeatherSpider(scrapy.Spider):
     # https://sz.ke.com/chengjiao/nanshanqu/pg2/
     name = "beike"
-    allowed_domains = ["wh.ke.com"]
-    start_urls = ['https://wh.ke.com/']
+    allowed_domains = ["bj.ke.com"]
+    start_urls = ['https://bj.ke.com/']
 
     def start_requests(self):
-        for i in range(1, 2):
+        for i in range(30, end_page):
             #
             # 江岸区：成交100-200万，5年以内
             # url = self.start_urls[0] + "chengjiao/jiangan" + "/" + "pg" + str(i) + "y1p3p4/"
@@ -87,62 +90,67 @@ class WeatherSpider(scrapy.Spider):
     def parse(self, response):
         if response is None:
             return
-        common_str = '//*[@data-component="list"]/ul/li/div[@class="info"]'
-        ListTitle = response.xpath(
-            common_str + '/div[@class="title"]/a/text()').extract()
-        ListMaidian = response.xpath(
-            common_str + '/div[@class="title"]/a/@href').extract()
-        ListdealDate = response.xpath(
-            common_str + '/div[@class="address"]/div[@class="dealDate"]/text()').extract()
-        ListtotalPrice = response.xpath(
-            common_str + '/div[@class="address"]/div[@class="totalPrice"]/span/text()').extract()
-        ListUnitPrice = response.xpath(
-            common_str + '/div[@class="flood"]/div[@class="unitPrice"]/span/text()').extract()
+        select_area_list = response.xpath('//*[@data-role="ershoufang"]/div[1]/a[@class="selected CLICKDATA"]/text()').extract()
+        if select_area_list is not None and isinstance(select_area_list, list) and len(select_area_list) == 1:
+            area = select_area_list[0]
+            area = area.replace(' ', '').replace('\n', '')
+            common_str = '//*[@data-component="list"]/ul/li/div[@class="info"]'
+            ListTitle = response.xpath(
+                common_str + '/div[@class="title"]/a/text()').extract()
+            ListMaidian = response.xpath(
+                common_str + '/div[@class="title"]/a/@href').extract()
+            ListdealDate = response.xpath(
+                common_str + '/div[@class="address"]/div[@class="dealDate"]/text()').extract()
+            ListtotalPrice = response.xpath(
+                common_str + '/div[@class="address"]/div[@class="totalPrice"]/span/text()').extract()
+            ListUnitPrice = response.xpath(
+                common_str + '/div[@class="flood"]/div[@class="unitPrice"]/span/text()').extract()
 
-        ListHouseAge = response.xpath(
-            common_str + '/div[@class="flood"]/div[1]/text()').extract()
+            ListHouseAge = response.xpath(
+                common_str + '/div[@class="flood"]/div[1]/text()').extract()
 
-        ListGuapai_price = response.xpath(
-            common_str + '/div[@class="dealCycleeInfo"]/span[@class="dealCycleTxt"][1]/span[1]/text()').extract()
+            ListGuapai_price = response.xpath(
+                common_str + '/div[@class="dealCycleeInfo"]/span[@class="dealCycleTxt"][1]/span[1]/text()').extract()
 
-        Listdealcycle_date = response.xpath(
-            common_str + '/div[@class="dealCycleeInfo"]/span[@class="dealCycleTxt"][1]/span[2]/text()').extract()
+            Listdealcycle_date = response.xpath(
+                common_str + '/div[@class="dealCycleeInfo"]/span[@class="dealCycleTxt"][1]/span[2]/text()').extract()
 
-        # SQL 插入语句
-        # sql = ' INSERT IGNORE INTO beike_inner_5years_100_200 (id,community_name,chengjiao_dealDate,chengjiao_totalPrice,chengjiao_unitPrice) VALUES '
-        # sql = ' INSERT IGNORE INTO beike_ja_shgg (id,community_name,chengjiao_dealDate,chengjiao_totalPrice,chengjiao_unitPrice, xiaoqu_name, guapai_price, dealcycle_date, kanjia_price) VALUES '
-        # sql = ' INSERT IGNORE INTO beike_sz_nanshanqu (id, community_name, chengjiao_dealDate, chengjiao_totalPrice, chengjiao_unitPrice) VALUES '
-        size = len(ListTitle)
-        size_house_age = len(ListHouseAge)
-        flag = size_house_age == size * 2
+            # SQL 插入语句
+            # sql = ' INSERT IGNORE INTO beike_inner_5years_100_200 (id,community_name,chengjiao_dealDate,chengjiao_totalPrice,chengjiao_unitPrice) VALUES '
+            # sql = ' INSERT IGNORE INTO beike_ja_shgg (id,community_name,chengjiao_dealDate,chengjiao_totalPrice,chengjiao_unitPrice, xiaoqu_name, guapai_price, dealcycle_date, kanjia_price) VALUES '
+            # sql = ' INSERT IGNORE INTO beike_sz_nanshanqu (id, community_name, chengjiao_dealDate, chengjiao_totalPrice, chengjiao_unitPrice) VALUES '
+            size = len(ListTitle)
+            size_house_age = len(ListHouseAge)
+            flag = size_house_age == size * 2
 
-        for i in range(size):
-            item = MingyanItem()
-            href_str = ListMaidian[i]
-            new_str = getId(href_str)
-            item['maidian_id'] = new_str
-            community_name = ListTitle[i]
-            item['community_name'] = community_name
-            chengjiao_dealDate_str = str(ListdealDate[i]).replace(' ', '').replace('\n', '').replace('\r', '')
-            item['chengjiao_dealDate'] = time_mk(chengjiao_dealDate_str)
-            item['chengjiao_totalPrice'] = ListtotalPrice[i]
-            item['chengjiao_unitPrice'] = ListUnitPrice[i]
-            item['xiaoqu_name'] = getXiaquName(community_name)
+            for i in range(size):
+                item = MingyanItem()
+                href_str = ListMaidian[i]
+                new_str = getId(href_str)
+                item['maidian_id'] = new_str
+                community_name = ListTitle[i]
+                item['community_name'] = community_name
+                chengjiao_dealDate_str = str(ListdealDate[i]).replace(' ', '').replace('\n', '').replace('\r', '')
+                item['chengjiao_dealDate'] = time_mk(chengjiao_dealDate_str)
+                item['chengjiao_totalPrice'] = ListtotalPrice[i]
+                item['chengjiao_unitPrice'] = ListUnitPrice[i]
+                item['xiaoqu_name'] = getXiaquName(community_name)
 
-            guapai_price_str = ListGuapai_price[i]
-            item['guapai_price'] = str(guapai_price_str).replace('挂牌', '').replace('万', '').replace(' ', '')
-            dealcycle_date_str = Listdealcycle_date[i]
-            item['dealcycle_date'] = str(dealcycle_date_str).replace('成交周期', '').replace('天', '').replace(' ', '')
-            item['kanjia_price'] = Decimal(item['guapai_price']) - Decimal(item['chengjiao_totalPrice'])
-            item['area'] = area
-            if flag:
-                house_age = getAge(ListHouseAge[2 * i + 1])
-            else:
-                house_age = ''
+                guapai_price_str = ListGuapai_price[i]
+                item['guapai_price'] = str(guapai_price_str).replace('挂牌', '').replace('万', '').replace(' ', '')
+                dealcycle_date_str = Listdealcycle_date[i]
+                item['dealcycle_date'] = str(dealcycle_date_str).replace('成交周期', '').replace('天', '').replace(' ', '')
+                item['kanjia_price'] = Decimal(item['guapai_price']) - Decimal(item['chengjiao_totalPrice'])
+                item['area'] = area
+                if flag:
+                    house_age = getAge(ListHouseAge[2 * i + 1])
+                else:
+                    house_age = ''
 
-            item['house_age'] = house_age
+                item['house_age'] = house_age
+                item['city_name'] = city_name
 
-            yield item
+                yield item
 
 
 def getId(a):

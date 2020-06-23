@@ -86,6 +86,8 @@ def getAge(a):
 def time_mk(time):
     if str(time).__contains__('.'):
         a = str(time).replace('.', '-')
+        if str(time).count('.') == 1:
+            a = a + "-01"
         return a
 
 def is_number(s):
@@ -103,3 +105,8 @@ def is_number(s):
         pass
 
     return False
+
+
+if __name__ == "__main__":
+    a = time_mk('2020.01.05')
+    print(a)

@@ -10,16 +10,16 @@ from mingyan.items import MingyanItem
 # from test import time_mk
 from mingyan.util.minyanitem import getMinyanItem
 
-city_name = '北京'
+city_name = '上海'
 tiaojian = '/'
-end_page = 60
+end_page = 22
 
 
 class WeatherSpider(scrapy.Spider):
     # https://sz.ke.com/chengjiao/nanshanqu/pg2/
     name = "beike_all_area_of_chengjiao_by_city"
-    allowed_domains = ["bj.ke.com"]
-    start_urls = ['https://bj.ke.com']
+    allowed_domains = ["sh.ke.com"]
+    start_urls = ['https://sh.ke.com']
 
     def start_requests(self):
         # 武汉二手房：https://wh.ke.com/chengjiao/pg2/
@@ -31,7 +31,7 @@ class WeatherSpider(scrapy.Spider):
             '//*[@data-role="ershoufang"]/div[1]/a[@class=" CLICKDATA"]/@href').extract()
         for j in range(len(select_area_href_list_first)):
             # 武汉二手房：https://wh.ke.com/chengjiao/pg2/
-            for i in range(51, end_page):
+            for i in range(11, end_page):
                 url = self.start_urls[0] + select_area_href_list_first[j] + "pg" + str(i) + tiaojian
                 print("请求url:" + url)
                 # time.sleep(0.5)

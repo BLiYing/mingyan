@@ -4,13 +4,14 @@
 #
 # See documentation in:
 # https://docs.scrapy.org/en/latest/topics/spider-middleware.html
+import base64
 import random
 
-import requests
 from scrapy import signals
 
 from mingyan.settings import USER_AGENT_LIST
 from mingyan.tools.crawl_xici_ip import GetIP
+from mingyan.util.manager import get_random_proxy_from_redis
 
 
 class MingyanSpiderMiddleware:
@@ -34,11 +35,14 @@ class MingyanSpiderMiddleware:
 
     def process_request(self, request, spider):
         # ip = random.choice(self.ip)
-        # get_ip = GetIP()
-        # ip = get_ip.get_random_ip()
-        ip = get_random_proxy()
+        get_ip = GetIP()
+        ip = get_ip.get_random_ip_from_mysql()
+        # ip = get_ip.get_random_ip_from_redis()
+
         print("this is request ip:" + ip)
-        request.meta['Proxy'] = ip
+        if not request.meta.get('proxy'):
+            request.meta['proxy'] = ip
+            request.meta['max_retry_times'] = 2
 
     def process_spider_input(self, response, spider):
         # Called for each response that goes through the spider
@@ -75,13 +79,7 @@ class MingyanSpiderMiddleware:
     def spider_opened(self, spider):
         spider.logger.info('Spider opened: %s' % spider.name)
 
-proxypool_url = 'http://127.0.0.1:5555/random'
-def get_random_proxy():
-        """
-        get random proxy from proxypool
-        :return: proxy
-        """
-        return requests.get(proxypool_url).text.strip()
+
 
 class MingyanDownloaderMiddleware:
     # Not all methods need to be defined. If a method is not defined,

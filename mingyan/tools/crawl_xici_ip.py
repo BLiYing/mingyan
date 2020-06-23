@@ -1,4 +1,5 @@
 # coding=utf-8
+import telnetlib
 import time
 
 import requests
@@ -8,6 +9,8 @@ import json
 import urllib
 from urllib import request
 from urllib import parse
+
+from mingyan.util.manager import get_random_proxy_from_redis
 
 conn = pymysql.connect(host="127.0.0.1", user="root", passwd="root", db="beike", charset="utf8")
 cursor = conn.cursor()
@@ -90,11 +93,12 @@ def get_ip():
                 unique_id = ip_bean['data']['data'][i]['unique_id']
                 print(unique_id)
 
-                ip_list.append((ip, port, proxy_type, speed,unique_id))
+                ip_list.append((ip, port, proxy_type, speed, unique_id))
 
                 for ip_info in ip_list:
-                    cursor.execute("insert ignore proxy(ip, port, proxy_type, speed,unique_id) VALUES('{0}', {1}, '{2}', '{3}','{4}')".format(
-                        ip_info[0], ip_info[1], ip_info[2], ip_info[3], ip_info[4])
+                    cursor.execute(
+                        "insert ignore proxy(ip, port, proxy_type, speed,unique_id) VALUES('{0}', {1}, '{2}', '{3}','{4}')".format(
+                            ip_info[0], ip_info[1], ip_info[2], ip_info[3], ip_info[4])
                     )
                     conn.commit()
         time.sleep(2)
@@ -112,7 +116,9 @@ class GetIP(object):
 
     def judge_ip(self, ip, port):
         # 判断ip是否可用
-        http_url = "https://www.baidu.com"
+        # http_url = "https://www.baidu.com"
+        # http_url = "https://bj.ke.com/"
+        http_url = "http://icanhazip.com"
         proxy_url = "http://{0}:{1}".format(ip, port)
         try:
             proxy_dict = {
@@ -128,17 +134,44 @@ class GetIP(object):
             code = response.status_code
             # select_area_list_index = response.text.find('class=" CLICKDATA"')
             if code >= 200 and code < 300:
-                print("effective ip")
+                print("effective ip,code=" + str(code))
                 return True
             else:
                 print("invalid ip and port")
                 self.delete_ip(ip)
                 return False
 
-    def get_random_ip(self):
+    def judge_ip_from_redis(self, http_str):
+        # 判断ip是否可用
+        # http_url = "https://www.baidu.com"
+        # http_url = "https://bj.ke.com/"
+        http_url = "http://icanhazip.com"
+        proxy_url = http_str
+        try:
+            proxy_dict = {
+                "http": proxy_url,
+            }
+            response = requests.get(http_url, proxies=proxy_dict)
+
+        except Exception as e:
+            print("invalid ip and port")
+            # self.delete_ip(ip)
+            return False
+        else:
+            code = response.status_code
+            if code >= 200 and code < 300:
+                print("effective ip,code=" + str(code))
+                return True
+            else:
+                print("invalid ip and port")
+                # self.delete_ip(ip)
+                return False
+
+    def get_random_ip_from_mysql(self):
         # 从数据库中随机获取一个可用的ip
         random_sql = """ SELECT ip, port FROM proxy WHERE speed < 1000 ORDER BY RAND() LIMIT 1 """
         result = cursor.execute(random_sql)
+
         for ip_info in cursor.fetchall():
             ip = ip_info[0]
             port = ip_info[1]
@@ -147,10 +180,20 @@ class GetIP(object):
             if judge_re:
                 return "http://{0}:{1}".format(ip, port)
             else:
-                return self.get_random_ip()
+                return self.get_random_ip_from_mysql()
+
+    def get_random_ip_from_redis(self):
+        ip_port = get_random_proxy_from_redis()
+        https_str = 'http://' + ip_port
+        print('redis代理ip :' + https_str)
+        judge_re = self.judge_ip_from_redis(https_str)
+        if judge_re:
+            return https_str
+        else:
+            return self.get_random_ip_from_redis()
 
 
 if __name__ == "__main__":
     crawl_ips()
     get_ip = GetIP()
-    print(get_ip.get_random_ip())
+    print(get_ip.get_random_ip_from_mysql())

@@ -1,3 +1,5 @@
+import time
+
 import scrapy
 
 
@@ -12,12 +14,17 @@ class WeatherSpider(scrapy.Spider):
 
     def start_requests(self):
 
-        for i in range(1, 2):
+        for i in range(1, 10):
             url = self.start_urls[0]
+            time.sleep(2)
             yield scrapy.Request(url=url)
 
 
     def parse(self, response):
         if response is None:
             return
-        print('代理后的ip: ', response.text)
+        print('--------------------------------')
+        print('--------------------------------')
+        print('--------------------------------')
+        print('--------------------------------')
+        print('--------------------------------代理后的ip: ', response.text)

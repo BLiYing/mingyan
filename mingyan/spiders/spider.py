@@ -9,10 +9,10 @@ from mingyan.items import MingyanItem
 from mingyan.util.minyanitem import getMinyanItem
 
 city_name = '北京'
-area = 'fengtai'
+area = 'chaoyang'
 #根据面积查找 hanyang/a3a4a5a6a7/ https://wh.ke.com/chengjiao/qingshan/
 tiaojian = ''
-end_page = 54
+end_page = 101
 
 
 
@@ -23,7 +23,7 @@ class WeatherSpider(scrapy.Spider):
     start_urls = ['https://bj.ke.com/']
 
     def start_requests(self):
-        for i in range(53, end_page):
+        for i in range(25, end_page):
             #
             # 江岸区：成交100-200万，5年以内
             # url = self.start_urls[0] + "chengjiao/jiangan" + "/" + "pg" + str(i) + "y1p3p4/"

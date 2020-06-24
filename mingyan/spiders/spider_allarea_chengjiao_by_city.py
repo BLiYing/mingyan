@@ -10,16 +10,14 @@ from mingyan.items import MingyanItem
 # from test import time_mk
 from mingyan.util.minyanitem import getMinyanItem
 
-city_name = '上海'
+city_name = '广州'
 tiaojian = '/'
-end_page = 22
-
 
 class WeatherSpider(scrapy.Spider):
     # https://sz.ke.com/chengjiao/nanshanqu/pg2/
     name = "beike_all_area_of_chengjiao_by_city"
-    allowed_domains = ["sh.ke.com"]
-    start_urls = ['https://sh.ke.com']
+    allowed_domains = ["gz.ke.com"]
+    start_urls = ['https://gz.ke.com']
 
     def start_requests(self):
         # 武汉二手房：https://wh.ke.com/chengjiao/pg2/
@@ -29,13 +27,38 @@ class WeatherSpider(scrapy.Spider):
     def parse_a(self, response):
         select_area_href_list_first = response.xpath(
             '//*[@data-role="ershoufang"]/div[1]/a[@class=" CLICKDATA"]/@href').extract()
+
         for j in range(len(select_area_href_list_first)):
+            area_i = select_area_href_list_first[j]
+            url = self.start_urls[0] + area_i + "pg1" + tiaojian
+            yield scrapy.Request(url=url, callback=self.parse_b)
+
             # 武汉二手房：https://wh.ke.com/chengjiao/pg2/
-            for i in range(11, end_page):
-                url = self.start_urls[0] + select_area_href_list_first[j] + "pg" + str(i) + tiaojian
+            # for i in range(1, end_page):
+            #     url = self.start_urls[0] + select_area_href_list_first[j] + "pg" + str(i) + tiaojian
+            #     print("请求url:" + url)
+            #     # time.sleep(0.5)
+            #     yield scrapy.Request(url=url, callback=self.parse_first)
+
+    def parse_b(self, response):
+        total_num = response.xpath(
+            '//*[@data-component="listOverview"]/div[@class="resultDes clear"]/div[@class="total fl"]/span/text()').extract()[0]
+        total_num = total_num.replace(' ', '').replace('\n', '')
+        select_area_list = response.xpath(
+            '//*[@data-role="ershoufang"]/div[1]/a[@class="selected CLICKDATA"]/@href').extract()
+        areaname = select_area_list[0]
+        # areaname = areaname.replace(' ', '').replace('\n', '')
+        if int(total_num) > 0:
+            num_avg = int(int(total_num)/30)
+            total_page = num_avg + 2
+            if total_page > 101:
+                total_page = 101
+            for i in range(1, total_page):
+                url = self.start_urls[0] + areaname + "pg" + str(i) + tiaojian
                 print("请求url:" + url)
                 # time.sleep(0.5)
                 yield scrapy.Request(url=url, callback=self.parse_first)
+
 
     def parse_first(self, response):
 
@@ -43,7 +66,7 @@ class WeatherSpider(scrapy.Spider):
             '//*[@data-role="ershoufang"]/div[1]/a[@class="selected CLICKDATA"]/text()').extract()
         if  isinstance(select_area_list, list) and len(select_area_list) == 1:
             area = select_area_list[0]
-            area = area.replace(' ', '').replace('\n', '')
+            # area = area.replace(' ', '').replace('\n', '')
 
             common_str = '//*[@data-component="list"]/ul/li/div[@class="info"]'
             ListTitle = response.xpath(

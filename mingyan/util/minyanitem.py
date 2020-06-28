@@ -20,17 +20,19 @@ def getMinyanItem(i, ListMaidian, ListTitle, ListdealDate, ListtotalPrice, ListU
     if flag:
         house_age = getAge(ListHouseAge[2 * i + 1])
     else:
-        house_age = ''
+        house_age = 'null'
 
     item['house_age'] = house_age
     item['city_name'] = city_name
 
-    if is_number(str(item['chengjiao_totalPrice'])) :
+    if is_number(str(item['chengjiao_totalPrice'])):
 
         item['chengjiao_unitPrice'] = ListUnitPrice[i]
-
-        guapai_price_str = ListGuapai_price[i]
-        item['guapai_price'] = str(guapai_price_str).replace('挂牌', '').replace('万', '').replace(' ', '')
+        if i < len(ListGuapai_price):
+            guapai_price_str = ListGuapai_price[i]
+            item['guapai_price'] = str(guapai_price_str).replace('挂牌', '').replace('万', '').replace(' ', '')
+        else:
+            item['guapai_price'] = 0
         if i < len(Listdealcycle_date):
             dealcycle_date_str = Listdealcycle_date[i]
         else:

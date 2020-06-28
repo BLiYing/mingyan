@@ -40,9 +40,10 @@ class MingyanSpiderMiddleware:
         # ip = get_ip.get_random_ip_from_redis()
 
         print("this is request ip:" + ip)
-        if not request.meta.get('proxy'):
-            request.meta['proxy'] = ip
-            request.meta['max_retry_times'] = 2
+        request.meta['proxy'] = ip
+        # request.meta['REMOTE_ADDR'] = ip
+        request.meta['max_retry_times'] = 2
+
 
     def process_spider_input(self, response, spider):
         # Called for each response that goes through the spider

@@ -1,6 +1,7 @@
 """
 数据库连接工具类
 # """
+import datetime
 import logging
 
 import pymysql
@@ -221,4 +222,6 @@ class MysqlUtil(object):
         self._cursor.close()
         self._conn.close()
         logging.info('--------------------------------------close db success')
+        now_time = datetime.datetime.now().strftime('%F %T') # 创建一个datetime类对象
+        logging.info('--------------------------------------finish time: ' + str(now_time))
 

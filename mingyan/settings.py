@@ -20,17 +20,17 @@ FEED_EXPORT_ENCODING = 'UTF-8'
 # USER_AGENT = 'mingyan (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules 机器人协议
-ROBOTSTXT_OBEY = False
+# ROBOTSTXT_OBEY = False
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 # 并发
-# CONCURRENT_REQUESTS = 16
+CONCURRENT_REQUESTS = 64
 
 # # 智能限速/自动节流：AutoThrottle extension 开启True，默认False
 AUTOTHROTTLE_ENABLED = True
-# # 起始的延迟
+# # # # 起始的延迟
 AUTOTHROTTLE_START_DELAY = 5
-# # 最大延迟
+# # # 最大延迟
 AUTOTHROTTLE_MAX_DELAY = 10
 AUTOTHROTTLE_TARGET_CONCURRENCY = 0.5
 AUTOTHROTTLE_DEBUG = True
@@ -42,7 +42,7 @@ AUTOTHROTTLE_DEBUG = True
 DOWNLOAD_DELAY = 5
 # The download delay setting will honor only one of: 域名 或ip 并发数
 # CONCURRENT_REQUESTS_PER_DOMAIN = 32
-# CONCURRENT_REQUESTS_PER_IP = 32
+# CONCURRENT_REQUESTS_PER_IP = 4
 
 # Disable cookies (enabled by default)
 COOKIES_ENABLED = False
@@ -64,9 +64,11 @@ COOKIES_ENABLED = False
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
+
     'scrapy.contrib.downloadermiddleware.useragent.UserAgentMiddleware': None,
     'mingyan.middlewares.MingyanDownloaderMiddleware': 543,
     # 'mingyan.middlewares.MingyanSpiderMiddleware': 543,
+
 
 }
 
@@ -197,3 +199,8 @@ MYSQL_CHARSET = "utf8"
 
 # many task run on the same time
 COMMANDS_MODULE = 'mingyan.commands'
+
+
+DOWNLOAD_TIMEOUT = 15
+# REDIRECT_ENABLED = True
+# AWS_VERIFY = False

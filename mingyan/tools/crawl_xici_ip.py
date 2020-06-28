@@ -214,8 +214,8 @@ class GetIP(object):
     def judge_ip(self, ip, port):
         # 判断ip是否可用
         # http_url = "https://www.baidu.com"
-        http_url = "https://bj.ke.com/chengjiao"
-        # http_url = "http://icanhazip.com"
+        # http_url = "https://bj.ke.com/chengjiao"
+        http_url = "http://icanhazip.com"
         proxy_url = "http://{0}:{1}".format(ip, port)
         try:
             proxy_dict = {
@@ -229,9 +229,10 @@ class GetIP(object):
             return False
         else:
             code = response.status_code
-            # print(response.content)
-            if code >= 200 and code < 300:
 
+            if code >= 200 and code < 300:
+                if len(response.content) < 100:
+                    print(response.content)
                 print("effective ip,code=" + str(code))
                 return True
             else:

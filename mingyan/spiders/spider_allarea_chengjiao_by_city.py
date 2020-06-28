@@ -10,14 +10,18 @@ from mingyan.items import MingyanItem
 # from test import time_mk
 from mingyan.util.minyanitem import getMinyanItem
 
-city_name = '广州'
-tiaojian = '/'
+city_name = '上海'
+# tiaojian = ''
+p_list = ['p1', 'p2', 'p3', 'p4', 'p5', 'p6', 'p7']
+a_list = ['a1', 'a2', 'a3', 'a4', 'a5', 'a6', 'a7']
+y_list = ['y4', 'y5']
+
 
 class WeatherSpider(scrapy.Spider):
     # https://sz.ke.com/chengjiao/nanshanqu/pg2/
     name = "beike_all_area_of_chengjiao_by_city"
-    allowed_domains = ["gz.ke.com"]
-    start_urls = ['https://gz.ke.com']
+    allowed_domains = ["sh.ke.com"]
+    start_urls = ['https://sh.ke.com']
 
     def start_requests(self):
         # 武汉二手房：https://wh.ke.com/chengjiao/pg2/
@@ -28,36 +32,37 @@ class WeatherSpider(scrapy.Spider):
         select_area_href_list_first = response.xpath(
             '//*[@data-role="ershoufang"]/div[1]/a[@class=" CLICKDATA"]/@href').extract()
 
-        for j in range(len(select_area_href_list_first)):
+        for j in range(len(select_area_href_list_first) - 1, -1, -1):
             area_i = select_area_href_list_first[j]
-            url = self.start_urls[0] + area_i + "pg1" + tiaojian
-            yield scrapy.Request(url=url, callback=self.parse_b)
-
-            # 武汉二手房：https://wh.ke.com/chengjiao/pg2/
-            # for i in range(1, end_page):
-            #     url = self.start_urls[0] + select_area_href_list_first[j] + "pg" + str(i) + tiaojian
-            #     print("请求url:" + url)
-            #     # time.sleep(0.5)
-            #     yield scrapy.Request(url=url, callback=self.parse_first)
+            if str(area_i).__contains__('pudong'):
+                for p_index in range(0, len(p_list)):
+                    for a_index in range(0, len(a_list)):
+                        for y_index in range(0, len(y_list)):
+                            tiaojian = p_list[p_index] + a_list[a_index] + y_list[y_index]
+                            url = self.start_urls[0] + area_i + "pg1" + tiaojian
+                            # print(url)
+                            yield scrapy.Request(url=url, callback=self.parse_b, meta={'tiaojian': tiaojian})
 
     def parse_b(self, response):
+        # tiaojian = response.meta['tiaojian']
         total_num = response.xpath(
-            '//*[@data-component="listOverview"]/div[@class="resultDes clear"]/div[@class="total fl"]/span/text()').extract()[0]
-        total_num = total_num.replace(' ', '').replace('\n', '')
-        select_area_list = response.xpath(
-            '//*[@data-role="ershoufang"]/div[1]/a[@class="selected CLICKDATA"]/@href').extract()
-        areaname = select_area_list[0]
-        # areaname = areaname.replace(' ', '').replace('\n', '')
-        if int(total_num) > 0:
-            num_avg = int(int(total_num)/30)
-            total_page = num_avg + 2
-            if total_page > 101:
-                total_page = 101
-            for i in range(1, total_page):
-                url = self.start_urls[0] + areaname + "pg" + str(i) + tiaojian
-                print("请求url:" + url)
-                # time.sleep(0.5)
-                yield scrapy.Request(url=url, callback=self.parse_first)
+            '//*[@data-component="listOverview"]/div[@class="resultDes clear"]/div[@class="total fl"]/span/text()').extract()
+        if len(total_num) > 0:
+            total_num = total_num[0].replace(' ', '').replace('\n', '')
+            select_area_list = response.xpath(
+                '//*[@data-role="ershoufang"]/div[1]/a[@class="selected CLICKDATA"]/@href').extract()
+            areaname = select_area_list[0]
+            # areaname = areaname.replace(' ', '').replace('\n', '')
+            if int(total_num) > 0:
+                num_avg = int(int(total_num)/30)
+                total_page = num_avg + 2
+                if total_page > 101:
+                    total_page = 101
+                for i in range(total_page - 1, -1, -1):
+                    url = self.start_urls[0] + areaname + "pg" + str(i)
+                    print("请求url:" + url)
+                    # time.sleep(0.5)
+                    yield scrapy.Request(url=url, callback=self.parse_first)
 
 
     def parse_first(self, response):

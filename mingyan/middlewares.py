@@ -41,7 +41,8 @@ class MingyanSpiderMiddleware:
 
         print("this is request ip:" + ip)
         request.meta['proxy'] = ip
-        # request.meta['REMOTE_ADDR'] = ip
+        # request.meta['https_proxy'] = ip
+        # request.meta['http_proxy'] = ip
         request.meta['max_retry_times'] = 2
 
 

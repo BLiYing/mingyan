@@ -30,7 +30,10 @@ def getMinyanItem(i, ListMaidian, ListTitle, ListdealDate, ListtotalPrice, ListU
         item['chengjiao_unitPrice'] = ListUnitPrice[i]
         if i < len(ListGuapai_price):
             guapai_price_str = ListGuapai_price[i]
-            item['guapai_price'] = str(guapai_price_str).replace('挂牌', '').replace('万', '').replace(' ', '')
+            if guapai_price_str.__contains__('成交'):
+                item['guapai_price'] = 0
+            else:
+                item['guapai_price'] = str(guapai_price_str).replace('挂牌', '').replace('万', '').replace(' ', '')
         else:
             item['guapai_price'] = 0
         if i < len(Listdealcycle_date):
@@ -44,7 +47,11 @@ def getMinyanItem(i, ListMaidian, ListTitle, ListdealDate, ListtotalPrice, ListU
             item['kanjia_price'] = 0
 
     else:
-        item['chengjiao_unitPrice'] = 0
+        item['chengjiao_totalPrice'] = get_price(ListtotalPrice[i])
+        if is_number(str(ListUnitPrice[i])) is False:
+            item['chengjiao_unitPrice'] = get_price(ListUnitPrice[i])
+        else:
+            item['chengjiao_unitPrice'] = 0
         item['guapai_price'] = 0
         item['dealcycle_date'] = 0
         item['kanjia_price'] = 0
@@ -108,7 +115,14 @@ def is_number(s):
 
     return False
 
+def get_price(a):
+    if str(a).__contains__('-'):
+        end_index = a.find('-')
+        if end_index > 0:
+            b = str(a)[0:end_index]
+            return b
+
 
 if __name__ == "__main__":
-    a = time_mk('2020.01.05')
+    a = get_price('345-5657')
     print(a)

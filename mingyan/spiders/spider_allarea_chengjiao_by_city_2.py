@@ -1,43 +1,83 @@
+import time
 import traceback
 from decimal import Decimal
 
 import scrapy
 
 from mingyan.items import MingyanItem
+
+# 打开数据库连接
+# from test import time_mk
 from mingyan.util.minyanitem import getMinyanItem
 
-city_name = '武汉'
-area = ''
-#根据面积查找2768
-tiaojian = ''
-end_page = 2
-
+city_name = '北京'
+p_list = ['p1', 'p2', 'p3', 'p4', 'p5', 'p6', 'p7', 'p8']
+a_list = ['a1', 'a2', 'a3', 'a4', 'a5', 'a6', 'a7']
+y_list = ['y4', 'y5']
+lc_list = ['lc1', 'lc2', 'lc3', 'lc4', 'lc5']
+proxy_ip = ''
 
 
 class WeatherSpider(scrapy.Spider):
     # https://sz.ke.com/chengjiao/nanshanqu/pg2/
-    name = "beike_b"
-    allowed_domains = ["wh.ke.com"]
-    start_urls = ['https://wh.ke.com/']
-
-
+    name = "beike_all_area_of_chengjiao_by_city_2"
+    allowed_domains = ["bj.ke.com"]
+    start_urls = ['https://bj.ke.com']
 
     def start_requests(self):
+        # 武汉二手房：https://wh.ke.com/chengjiao/pg2/
+        url = self.start_urls[0] + "/chengjiao/"
+        yield scrapy.Request(url=url, callback=self.parse_a, meta={'proxy': proxy_ip})
 
-        for i in range(1, end_page):
-            # 武汉二手房：https://wh.ke.com/chengjiao/pg2/
-            url = self.start_urls[0] + "chengjiao/" + area + "/" + "pg" + str(i) + tiaojian
-            print("请求url:" + url)
-            yield scrapy.Request(url=url)
+    def parse_a(self, response):
+        select_area_href_list_first = response.xpath(
+            '//*[@data-role="ershoufang"]/div[1]/a[@class=" CLICKDATA"]/@href').extract()
 
-    def parse(self, response):
-        if response is None:
-            return
+        for j in range(len(select_area_href_list_first) - 1, -1, -1):
+            area_i = select_area_href_list_first[j]
+            if str(area_i).__contains__('chaoyang'):
+
+                for p_index in range(0, len(p_list)):
+                    for a_index in range(0, len(a_list)):
+                        for y_index in range(0, len(y_list)):
+                            for lc_index in range(0, len(lc_list)):
+                                tiaojian = p_list[p_index] + a_list[a_index] + y_list[y_index] + lc_list[lc_index]
+                                url = self.start_urls[0] + area_i + "pg1" + tiaojian
+                                # print(url)
+                                yield scrapy.Request(url=url, callback=self.parse_b,
+                                                     meta={'tiaojian': tiaojian, 'proxy': proxy_ip})
+
+
+
+    def parse_b(self, response):
+        total_num = response.xpath(
+            '//*[@data-component="listOverview"]/div[@class="resultDes clear"]/div[@class="total fl"]/span/text()').extract()
+        if len(total_num) > 0:
+            total_num = total_num[0].replace(' ', '').replace('\n', '')
+            select_area_list = response.xpath(
+                '//*[@data-role="ershoufang"]/div[1]/a[@class="selected CLICKDATA"]/@href').extract()
+            areaname = select_area_list[0]
+            # areaname = areaname.replace(' ', '').replace('\n', '')
+            if int(total_num) > 0:
+                num_avg = int(int(total_num)/30)
+                total_page = num_avg + 2
+                if total_page > 101:
+                    total_page = 101
+                for i in range(total_page - 1, -1, -1):
+                    url = self.start_urls[0] + areaname + "pg" + str(i)
+                    print("请求url:" + url)
+                    # time.sleep(0.5)
+                    yield scrapy.Request(url=url, callback=self.parse_first, meta={'proxy': proxy_ip})
+
+
+    def parse_first(self, response):
+
         select_area_list = response.xpath(
             '//*[@data-role="ershoufang"]/div[1]/a[@class="selected CLICKDATA"]/text()').extract()
-        if select_area_list is not None and isinstance(select_area_list, list) and len(select_area_list) == 1:
+        if  isinstance(select_area_list, list) and len(select_area_list) == 1:
             area = select_area_list[0]
-            area = area.replace(' ', '').replace('\n', '')
+            # area = area.replace(' ', '').replace('\n', '')
+
             common_str = '//*[@data-component="list"]/ul/li/div[@class="info"]'
             ListTitle = response.xpath(
                 common_str + '/div[@class="title"]/a/text()').extract()
@@ -59,10 +99,6 @@ class WeatherSpider(scrapy.Spider):
             Listdealcycle_date = response.xpath(
                 common_str + '/div[@class="dealCycleeInfo"]/span[@class="dealCycleTxt"][1]/span[2]/text()').extract()
 
-            # SQL 插入语句
-            # sql = ' INSERT IGNORE INTO beike_inner_5years_100_200 (id,community_name,chengjiao_dealDate,chengjiao_totalPrice,chengjiao_unitPrice) VALUES '
-            # sql = ' INSERT IGNORE INTO beike_ja_shgg (id,community_name,chengjiao_dealDate,chengjiao_totalPrice,chengjiao_unitPrice, xiaoqu_name, guapai_price, dealcycle_date, kanjia_price) VALUES '
-            # sql = ' INSERT IGNORE INTO beike_sz_nanshanqu (id, community_name, chengjiao_dealDate, chengjiao_totalPrice, chengjiao_unitPrice) VALUES '
             size = len(ListTitle)
             size_house_age = len(ListHouseAge)
             flag = size_house_age == size * 2
@@ -71,32 +107,6 @@ class WeatherSpider(scrapy.Spider):
                 item = getMinyanItem(i, ListMaidian, ListTitle, ListdealDate, ListtotalPrice, ListUnitPrice,
                                      ListGuapai_price,
                                      Listdealcycle_date, ListHouseAge, flag, area, city_name)
-                # item = MingyanItem()
-                # href_str = ListMaidian[i]
-                # new_str = getId(href_str)
-                # item['maidian_id'] = new_str
-                # community_name = ListTitle[i]
-                # item['community_name'] = community_name
-                # chengjiao_dealDate_str = str(ListdealDate[i]).replace(' ', '').replace('\n', '').replace('\r', '')
-                # item['chengjiao_dealDate'] = time_mk(chengjiao_dealDate_str)
-                # item['chengjiao_totalPrice'] = ListtotalPrice[i]
-                # item['chengjiao_unitPrice'] = ListUnitPrice[i]
-                # item['xiaoqu_name'] = getXiaquName(community_name)
-                #
-                #
-                # guapai_price_str = ListGuapai_price[i]
-                # item['guapai_price'] = str(guapai_price_str).replace('挂牌', '').replace('万', '').replace(' ', '')
-                # dealcycle_date_str = Listdealcycle_date[i]
-                # item['dealcycle_date'] = str(dealcycle_date_str).replace('成交周期', '').replace('天', '').replace(' ', '')
-                # item['kanjia_price'] = Decimal(item['guapai_price']) - Decimal(item['chengjiao_totalPrice'])
-                # item['area'] = area
-                # if flag:
-                #     house_age = getAge(ListHouseAge[2 * i + 1])
-                # else:
-                #     house_age = ''
-                #
-                # item['house_age'] = house_age
-                # item['city_name'] = city_name
 
                 yield item
 
@@ -135,6 +145,7 @@ def getAge(a):
         return b
     else:
         return ''
+
 
 def time_mk(time):
     if str(time).__contains__('.'):

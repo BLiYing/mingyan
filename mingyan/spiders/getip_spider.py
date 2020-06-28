@@ -5,7 +5,7 @@ import scrapy
 
 class WeatherSpider(scrapy.Spider):
     # https://sz.ke.com/chengjiao/nanshanqu/pg2/
-    name = "getip_spider"
+    # name = "getip_spider"
 
     # 允许访问的域名
     allowed_domains = ['icanhazip.com']
@@ -14,7 +14,7 @@ class WeatherSpider(scrapy.Spider):
 
     def start_requests(self):
 
-        for i in range(1, 10):
+        for i in range(1, 1):
             url = self.start_urls[0]
             time.sleep(2)
             yield scrapy.Request(url=url)

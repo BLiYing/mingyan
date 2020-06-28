@@ -24,10 +24,10 @@ FEED_EXPORT_ENCODING = 'UTF-8'
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 # 并发
-CONCURRENT_REQUESTS = 64
+CONCURRENT_REQUESTS = 8
 
 # # 智能限速/自动节流：AutoThrottle extension 开启True，默认False
-AUTOTHROTTLE_ENABLED = True
+AUTOTHROTTLE_ENABLED = False
 # # # # 起始的延迟
 AUTOTHROTTLE_START_DELAY = 5
 # # # 最大延迟
@@ -102,7 +102,7 @@ ITEM_PIPELINES = {
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
-AUTOTHROTTLE_ENABLED = True
+# AUTOTHROTTLE_ENABLED = True
 # The initial download delay
 # AUTOTHROTTLE_START_DELAY = 5
 # The maximum download delay to be set in case of high latencies
@@ -201,6 +201,6 @@ MYSQL_CHARSET = "utf8"
 COMMANDS_MODULE = 'mingyan.commands'
 
 
-DOWNLOAD_TIMEOUT = 15
+DOWNLOAD_TIMEOUT = 30
 # REDIRECT_ENABLED = True
 # AWS_VERIFY = False

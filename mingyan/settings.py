@@ -24,10 +24,10 @@ FEED_EXPORT_ENCODING = 'UTF-8'
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 # 并发
-CONCURRENT_REQUESTS = 8
+# CONCURRENT_REQUESTS = 2
 
 # # 智能限速/自动节流：AutoThrottle extension 开启True，默认False
-AUTOTHROTTLE_ENABLED = False
+AUTOTHROTTLE_ENABLED = True
 # # # # 起始的延迟
 AUTOTHROTTLE_START_DELAY = 5
 # # # 最大延迟
@@ -97,7 +97,7 @@ PROXIES = ['http://61.135.185.38:80',
 # 数字越小优先级越高
 ITEM_PIPELINES = {
     'mingyan.pipelines.MingyanPipeline': 300,
-    # 'mingyan.pipelines.ShejiaoPipeline': 400,
+    # 'mingyan.pipelines.MongoPipeline': 400,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
@@ -192,7 +192,7 @@ MYSQL_CHARSET = "utf8"
 # LOG_ENABLED = True  # 启用日志，默认不启用
 # LOG_ENCODING = 'utf-8'
 # LOG_FILE = "/Users/liying/mingyan/beike_spider.{}-{}-{}.log".format(current_day.year, current_day.month, current_day.day)
-# LOG_LEVEL = "INFO"
+LOG_LEVEL = "INFO"
 # LOG_STDOUT = True  # 输出重定向至log日志，比如print
 # end logger configure setting
 
@@ -202,5 +202,10 @@ COMMANDS_MODULE = 'mingyan.commands'
 
 
 DOWNLOAD_TIMEOUT = 30
-# REDIRECT_ENABLED = True
+# REDIRECT_ENABLED = False
 # AWS_VERIFY = False
+
+# mongodb://localhost:27070/runoob?readPreference=primary&appname=MongoDB%20Compass&ssl=false
+# mongodb://localhost:27070
+MONGO_URI = 'mongodb://localhost:27070'
+MONGO_DB = 'runoob'

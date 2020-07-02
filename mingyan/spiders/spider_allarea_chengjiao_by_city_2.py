@@ -1,28 +1,22 @@
-import time
-import traceback
-from decimal import Decimal
-
 import scrapy
-
-from mingyan.items import MingyanItem
 
 # 打开数据库连接
 # from test import time_mk
 from mingyan.util.minyanitem import getMinyanItem
 
-city_name = '北京'
-p_list = ['p1', 'p2', 'p3', 'p4', 'p5', 'p6', 'p7', 'p8']
+city_name = '石家庄'
+p_list = ['p1', 'p2', 'p3', 'p4', 'p5', 'p6', 'p7']
 a_list = ['a1', 'a2', 'a3', 'a4', 'a5', 'a6', 'a7']
 y_list = ['y4', 'y5']
-lc_list = ['lc1', 'lc2', 'lc3', 'lc4', 'lc5']
-proxy_ip = ''
+# lc_list = ['lc1', 'lc2', 'lc3', 'lc4', 'lc5']
+proxy_ip = 'http://47.100.14.22:9006'
 
 
 class WeatherSpider(scrapy.Spider):
     # https://sz.ke.com/chengjiao/nanshanqu/pg2/
     name = "beike_all_area_of_chengjiao_by_city_2"
-    allowed_domains = ["bj.ke.com"]
-    start_urls = ['https://bj.ke.com']
+    allowed_domains = ["sjz.ke.com"]
+    start_urls = ['https://sjz.ke.com']
 
     def start_requests(self):
         # 武汉二手房：https://wh.ke.com/chengjiao/pg2/
@@ -35,17 +29,17 @@ class WeatherSpider(scrapy.Spider):
 
         for j in range(len(select_area_href_list_first) - 1, -1, -1):
             area_i = select_area_href_list_first[j]
-            if str(area_i).__contains__('chaoyang'):
+            #if str(area_i).__contains__('chaoyang'):
 
-                for p_index in range(0, len(p_list)):
-                    for a_index in range(0, len(a_list)):
-                        for y_index in range(0, len(y_list)):
-                            for lc_index in range(0, len(lc_list)):
-                                tiaojian = p_list[p_index] + a_list[a_index] + y_list[y_index] + lc_list[lc_index]
-                                url = self.start_urls[0] + area_i + "pg1" + tiaojian
-                                # print(url)
-                                yield scrapy.Request(url=url, callback=self.parse_b,
-                                                     meta={'tiaojian': tiaojian, 'proxy': proxy_ip})
+            for p_index in range(0, len(p_list)):
+                for a_index in range(0, len(a_list)):
+                    for y_index in range(0, len(y_list)):
+                        # for lc_index in range(0, len(lc_list)):
+                            tiaojian = p_list[p_index] + a_list[a_index] + y_list[y_index] # + lc_list[lc_index]
+                            url = self.start_urls[0] + area_i + "pg1" + tiaojian
+                            # print(url)
+                            yield scrapy.Request(url=url, callback=self.parse_b,
+                                                 meta={'tiaojian': tiaojian, 'proxy': proxy_ip})
 
 
 

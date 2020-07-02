@@ -8,19 +8,19 @@ from mingyan.items import MingyanItem
 #from test import time_mk
 from mingyan.util.minyanitem import getMinyanItem
 
-city_name = '北京'
-area = 'tongzhou'
+city_name = '武汉'
+area = ''
 #根据面积查找 hanyang/a3a4a5a6a7/ https://wh.ke.com/chengjiao/qingshan/
-tiaojian = 'c1111027375554/?sug=11站'
-end_page = 9
+tiaojian = ''
+end_page = 22
 
 
 
 class WeatherSpider(scrapy.Spider):
     # https://sz.ke.com/chengjiao/nanshanqu/pg2/
     name = "beike"
-    allowed_domains = ["bj.ke.com"]
-    start_urls = ['https://bj.ke.com/']
+    allowed_domains = ["wh.ke.com"]
+    start_urls = ['https://wh.ke.com/']
 
     def start_requests(self):
         for i in range(1, end_page):
@@ -32,7 +32,7 @@ class WeatherSpider(scrapy.Spider):
             # url = self.start_urls[0] + "chengjiao/jiangan" + "/" + "pg" + str(i) + "c3711063250928/?sug=光明上海公馆"
 
             # 江岸区：福星华府成交：https://wh.ke.com/chengjiao/pg2c3711064071099/?sug=福星华府
-            # url = self.start_urls[0] + "chengjiao" + "/" + "pg" + str(i) + "c3711064071099/?sug=福星华府"
+            # url = self.start_urls[0] + "chengjiao/jianghan" + "/" + "pg" + str(i) + "c3711064071099/?sug=福星华府"
 
             # 江岸区：长投海德公园：https://wh.ke.com/chengjiao/c3711063612721/?sug=长投海德公园
             # url = self.start_urls[0] + "chengjiao" + "/" + "pg" + str(i) + "c3711063612721/?sug=长投海德公园"

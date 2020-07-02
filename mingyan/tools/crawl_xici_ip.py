@@ -233,6 +233,7 @@ class GetIP(object):
             if code >= 200 and code < 300:
                 if len(response.content) < 100:
                     print(response.content)
+                    print("============  " + str(response.text))
                 print("effective ip,code=" + str(code))
                 return True
             else:

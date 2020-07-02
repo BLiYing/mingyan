@@ -1,27 +1,24 @@
-import time
-import traceback
-from decimal import Decimal
-
 import scrapy
-
-from mingyan.items import MingyanItem
 
 # 打开数据库连接
 # from test import time_mk
 from mingyan.util.minyanitem import getMinyanItem
 
-city_name = '上海'
+city_name = '深圳'
 # tiaojian = ''
 p_list = ['p1', 'p2', 'p3', 'p4', 'p5', 'p6', 'p7']
 a_list = ['a1', 'a2', 'a3', 'a4', 'a5', 'a6', 'a7']
 y_list = ['y4', 'y5']
 
+tiaojian_is_not_noe = False
+end_page = 5
+
 
 class WeatherSpider(scrapy.Spider):
     # https://sz.ke.com/chengjiao/nanshanqu/pg2/
     name = "beike_all_area_of_chengjiao_by_city"
-    allowed_domains = ["sh.ke.com"]
-    start_urls = ['https://sh.ke.com']
+    allowed_domains = ["sz.ke.com"]
+    start_urls = ['https://sz.ke.com']
 
     def start_requests(self):
         # 武汉二手房：https://wh.ke.com/chengjiao/pg2/
@@ -34,7 +31,7 @@ class WeatherSpider(scrapy.Spider):
 
         for j in range(len(select_area_href_list_first) - 1, -1, -1):
             area_i = select_area_href_list_first[j]
-            if str(area_i).__contains__('pudong'):
+            if tiaojian_is_not_noe:
                 for p_index in range(0, len(p_list)):
                     for a_index in range(0, len(a_list)):
                         for y_index in range(0, len(y_list)):
@@ -42,23 +39,29 @@ class WeatherSpider(scrapy.Spider):
                             url = self.start_urls[0] + area_i + "pg1" + tiaojian
                             # print(url)
                             yield scrapy.Request(url=url, callback=self.parse_b, meta={'tiaojian': tiaojian})
+            else:
+                url = self.start_urls[0] + area_i + "pg1"
+                # print(url)
+                yield scrapy.Request(url=url, callback=self.parse_b)
 
     def parse_b(self, response):
         # tiaojian = response.meta['tiaojian']
         total_num = response.xpath(
             '//*[@data-component="listOverview"]/div[@class="resultDes clear"]/div[@class="total fl"]/span/text()').extract()
         if len(total_num) > 0:
-            total_num = total_num[0].replace(' ', '').replace('\n', '')
             select_area_list = response.xpath(
                 '//*[@data-role="ershoufang"]/div[1]/a[@class="selected CLICKDATA"]/@href').extract()
             areaname = select_area_list[0]
+            total_num = total_num[0].replace(' ', '').replace('\n', '')
             # areaname = areaname.replace(' ', '').replace('\n', '')
             if int(total_num) > 0:
                 num_avg = int(int(total_num)/30)
                 total_page = num_avg + 2
                 if total_page > 101:
                     total_page = 101
-                for i in range(total_page - 1, -1, -1):
+                if tiaojian_is_not_noe is False:
+                    total_page = end_page
+                for i in range(1, total_page):
                     url = self.start_urls[0] + areaname + "pg" + str(i)
                     print("请求url:" + url)
                     # time.sleep(0.5)

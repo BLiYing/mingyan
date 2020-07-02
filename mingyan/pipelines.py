@@ -7,6 +7,8 @@
 import logging
 import traceback
 
+import pymongo
+
 from mingyan.MysqlUtil import MysqlUtil
 
 
@@ -83,3 +85,42 @@ class MingyanPipeline:
         # 可以关闭数据库等
         self.__pool.dispose()
         pass
+
+
+class MongoPipeline(object):
+    collection_name = 'beike_ershoufang_chengjiao'
+
+    def __init__(self, mongo_uri, mongo_db):
+        self.mongo_uri = mongo_uri
+        self.mongo_db = mongo_db
+
+    @classmethod
+    def from_crawler(cls, crawler):
+        return cls(
+            mongo_uri=crawler.settings.get('MONGO_URI'),
+            mongo_db=crawler.settings.get('MONGO_DB')
+        )
+
+    def open_spider(self, spider):
+        self.client = pymongo.MongoClient(self.mongo_uri)
+        self.db = self.client[self.mongo_db]
+
+    def close_spider(self, spider):
+        self.client.close()
+
+    def process_item(self, item, spider):
+        data_dict = {'id': item['maidian_id'],
+                     'community_name': item['community_name'],
+                     'chengjiao_dealDate': item['chengjiao_dealDate'],
+                     'chengjiao_totalPrice': item['chengjiao_totalPrice'],
+                     'chengjiao_unitPrice': item['chengjiao_unitPrice'],
+                     'xiaoqu_name': item['xiaoqu_name'],
+                     'guapai_price': item['guapai_price'],
+                     'dealcycle_date': item['dealcycle_date'],
+                     'kanjia_price': str(item['kanjia_price']),
+                     'area': item['area'],
+                     'house_age': item['house_age'],
+                     'city_name': item['city_name']}
+        print("------------------------------mongo插入" + str(item['maidian_id']))
+        self.db[self.collection_name].insert_one(data_dict)
+        return item

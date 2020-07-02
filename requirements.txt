@@ -2,4 +2,4 @@ Scrapy==2.1.0
 PyMySQL==0.9.3
 pymongo==3.10.1
 urllib3==1.23
-requests==2.19.1
+requests==2.20.0

@@ -9,10 +9,10 @@ from mingyan.items import MingyanItem
 from mingyan.util.minyanitem import getMinyanItem
 
 city_name = '武汉'
-area = ''
+area = 'jiangan'
 #根据面积查找 hanyang/a3a4a5a6a7/ https://wh.ke.com/chengjiao/qingshan/
 tiaojian = ''
-end_page = 22
+end_page = 2
 
 
 

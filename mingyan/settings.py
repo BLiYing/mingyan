@@ -96,8 +96,8 @@ PROXIES = ['http://61.135.185.38:80',
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 # 数字越小优先级越高
 ITEM_PIPELINES = {
-    'mingyan.pipelines.MingyanPipeline': 300,
-    # 'mingyan.pipelines.MongoPipeline': 400,
+    # 'mingyan.pipelines.MingyanPipeline': 300,
+    'mingyan.pipelines.MongoPipeline': 400,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)

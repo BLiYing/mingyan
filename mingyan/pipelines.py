@@ -8,6 +8,7 @@ import logging
 import traceback
 
 import pymongo
+from pymongo.errors import DuplicateKeyError
 
 from mingyan.MysqlUtil import MysqlUtil
 
@@ -122,5 +123,5 @@ class MongoPipeline(object):
                      'house_age': item['house_age'],
                      'city_name': item['city_name']}
         print("------------------------------mongo插入" + str(item['maidian_id']))
-        self.db[self.collection_name].insert_one(data_dict)
+        self.db[self.collection_name].update(data_dict, {'$setOnInsert': data_dict}, upsert=True)
         return item

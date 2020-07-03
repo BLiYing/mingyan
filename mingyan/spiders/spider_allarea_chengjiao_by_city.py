@@ -4,21 +4,21 @@ import scrapy
 # from test import time_mk
 from mingyan.util.minyanitem import getMinyanItem
 
-city_name = '深圳'
+city_name = '北京'
 # tiaojian = ''
 p_list = ['p1', 'p2', 'p3', 'p4', 'p5', 'p6', 'p7']
 a_list = ['a1', 'a2', 'a3', 'a4', 'a5', 'a6', 'a7']
 y_list = ['y4', 'y5']
 
-tiaojian_is_not_noe = False
+tiaojian_is_not_noe = True
 end_page = 5
 
 
 class WeatherSpider(scrapy.Spider):
     # https://sz.ke.com/chengjiao/nanshanqu/pg2/
     name = "beike_all_area_of_chengjiao_by_city"
-    allowed_domains = ["sz.ke.com"]
-    start_urls = ['https://sz.ke.com']
+    allowed_domains = ["bj.ke.com"]
+    start_urls = ['https://bj.ke.com']
 
     def start_requests(self):
         # 武汉二手房：https://wh.ke.com/chengjiao/pg2/

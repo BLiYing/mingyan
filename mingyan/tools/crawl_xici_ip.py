@@ -1,27 +1,28 @@
 # coding=utf-8
 import hashlib
+import json
 import sys
-import telnetlib
 import time
+from urllib import parse
+from urllib import request
 
+import pymysql
 import requests
 import urllib3
-from scrapy.selector import Selector
-import pymysql
-import json
-import urllib
-from urllib import request
-from urllib import parse
+from scrapy.utils.project import get_project_settings
 
 from mingyan.tools import mytoken
-from mingyan.util.manager import get_random_proxy_from_redis
 
 # 登录后在个人中心获取
 spiderId = "2cabc4793e3a4cccab931bcadea3f865"
 secret = "fabcdc93e54d411da3579ddd84281819"
 time_unit = 10 * 60
 
-conn = pymysql.connect(host="127.0.0.1", user="root", passwd="root", db="beike", charset="utf8")
+# 获取setting文件中的配置
+settings = get_project_settings()
+conn = pymysql.connect(host=settings.get('MYSQL_HOST'), port=settings.get('MYSQL_PORT'),
+                       user=settings.get('MYSQL_USER'), passwd=settings.get('MYSQL_PASSWORD'),
+                       db=settings.get('MYSQL_DATABASE'), charset=settings.get('MYSQL_CHARSET'))
 cursor = conn.cursor()
 
 

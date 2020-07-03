@@ -184,7 +184,7 @@ MYSQL_PORT = 3306
 MYSQL_DATABASE = "beike"
 MYSQL_USER = "root"
 # Google19890906!@#$
-MYSQL_PASSWORD = "root"
+MYSQL_PASSWORD = "Google19890906!@#$"
 MYSQL_CHARSET = "utf8"
 # end of MySQL database configure setting
 

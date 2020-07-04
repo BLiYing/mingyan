@@ -15,8 +15,8 @@ proxy_ip = ''
 class WeatherSpider(scrapy.Spider):
     # https://sz.ke.com/chengjiao/nanshanqu/pg2/
     name = "beike_all_area_of_chengjiao_by_city_2"
-    allowed_domains = ["tj.ke.com"]
-    start_urls = ['https://tj.ke.com']
+    allowed_domains = ["bj.ke.com"]
+    start_urls = ['https://bj.ke.com']
 
     def start_requests(self):
         # 武汉二手房：https://wh.ke.com/chengjiao/pg2/

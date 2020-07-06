@@ -179,7 +179,8 @@ import datetime
 # db = pymysql.connect("localhost", "root", "root", "beike")
 
 # start MySQL database configure setting
-MYSQL_HOST = "127.0.0.1"
+# 123.57.84.56
+MYSQL_HOST = "123.57.84.56"
 MYSQL_PORT = 3306
 MYSQL_DATABASE = "beike"
 MYSQL_USER = "root"
@@ -203,6 +204,7 @@ COMMANDS_MODULE = 'mingyan.commands'
 
 
 DOWNLOAD_TIMEOUT = 30
+RETRY_TIMES = 1
 # REDIRECT_ENABLED = False
 # AWS_VERIFY = False
 

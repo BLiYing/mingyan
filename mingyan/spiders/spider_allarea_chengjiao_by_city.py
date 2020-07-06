@@ -10,8 +10,11 @@ p_list = ['p1', 'p2', 'p3', 'p4', 'p5', 'p6', 'p7']
 a_list = ['a1', 'a2', 'a3', 'a4', 'a5', 'a6', 'a7']
 y_list = ['y4', 'y5']
 
-tiaojian_is_not_noe = True
-end_page = 5
+# 控制是否需要条件限制 False:遍历查找各区中[start_page ，end_page - 1]页的的数据 True:遍历查找符合条件的所有数据
+# 由于贝壳每个条件下最多3000条数据（30 * 100），因此超出部分无法统计
+tiaojian_is_not_noe = False
+start_page = 1
+end_page = 2
 
 
 class WeatherSpider(scrapy.Spider):
@@ -55,24 +58,23 @@ class WeatherSpider(scrapy.Spider):
             total_num = total_num[0].replace(' ', '').replace('\n', '')
             # areaname = areaname.replace(' ', '').replace('\n', '')
             if int(total_num) > 0:
-                num_avg = int(int(total_num)/30)
+                num_avg = int(int(total_num) / 30)
                 total_page = num_avg + 2
                 if total_page > 101:
                     total_page = 101
-                if tiaojian_is_not_noe is False:
+                if tiaojian_is_not_noe is False and total_page > end_page:
                     total_page = end_page
-                for i in range(1, total_page):
+                for i in range(start_page, total_page):
                     url = self.start_urls[0] + areaname + "pg" + str(i)
                     print("请求url:" + url)
                     # time.sleep(0.5)
                     yield scrapy.Request(url=url, callback=self.parse_first)
 
-
     def parse_first(self, response):
 
         select_area_list = response.xpath(
             '//*[@data-role="ershoufang"]/div[1]/a[@class="selected CLICKDATA"]/text()').extract()
-        if  isinstance(select_area_list, list) and len(select_area_list) == 1:
+        if isinstance(select_area_list, list) and len(select_area_list) == 1:
             area = select_area_list[0]
             # area = area.replace(' ', '').replace('\n', '')
 
@@ -107,8 +109,6 @@ class WeatherSpider(scrapy.Spider):
                                      Listdealcycle_date, ListHouseAge, flag, area, city_name)
 
                 yield item
-
-
 
 
 def getId(a):

@@ -12,6 +12,7 @@ city_name = '武汉'
 # area = 'wuchang'
 #根据面积查找 hanyang/a3a4a5a6a7/ https://wh.ke.com/chengjiao/qingshan/
 tiaojian = ''
+start_page = 1
 end_page = 16
 
 
@@ -27,7 +28,7 @@ class WeatherSpider(scrapy.Spider):
                     'jiangxia', 'caidian', 'huangbei', 'xinzhou', 'zhuankoukaifaqu', 'hannan']
         arealist = ['dongxihu', 'jiangxia', 'caidian', 'huangbei', 'xinzhou', 'zhuankoukaifaqu', 'hannan']
         for area in arealist:
-            for i in range(5, end_page):
+            for i in range(start_page, end_page):
                 #
                 # 江岸区：成交100-200万，5年以内
                 # url = self.start_urls[0] + "chengjiao/jiangan" + "/" + "pg" + str(i) + "y1p3p4/"

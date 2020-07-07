@@ -11,7 +11,6 @@ from scrapy import cmdline
 
 # cmdline.execute('scrapy crawl beike_all_area_of_chengjiao_by_city'.split())
 cmdline.execute('scrapy crawl beike_all_area_of_chengjiao_by_city_2'.split())
-# cmdline.execute('scrapy crawl beike_all_area_of_chengjiao_by_city_3'.split())
 
 # cmdline.execute('scrapy crawl getip_spider'.split())
 # cmdline.execute('scrapy crawl beike -o ./beike.json'.split())

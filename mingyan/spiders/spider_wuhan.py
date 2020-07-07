@@ -19,7 +19,7 @@ end_page = 16
 
 class WeatherSpider(scrapy.Spider):
     # https://sz.ke.com/chengjiao/nanshanqu/pg2/
-    name = "beike"
+    # name = "beike"
     allowed_domains = ["wh.ke.com"]
     start_urls = ['https://wh.ke.com/']
 
@@ -86,7 +86,7 @@ class WeatherSpider(scrapy.Spider):
 
                 url = self.start_urls[0] + "chengjiao/" + area + "/" + "pg" + str(i) + tiaojian
                 print("请求url:" + url)
-                yield scrapy.Request(url=url)
+                yield scrapy.Request(url=url, dont_filter=True)
 
     def parse(self, response):
         if response is None:

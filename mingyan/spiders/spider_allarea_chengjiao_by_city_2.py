@@ -4,7 +4,7 @@ import scrapy
 # from test import time_mk
 from mingyan.util.minyanitem import getMinyanItem
 
-city_name = '北京'
+city_name = '成都'
 p_list = ['p1', 'p2', 'p3', 'p4', 'p5', 'p6', 'p7', 'p8']
 a_list = ['a1', 'a2', 'a3', 'a4', 'a5', 'a6', 'a7']
 y_list = ['y4', 'y5']
@@ -15,8 +15,8 @@ proxy_ip = ''
 class WeatherSpider(scrapy.Spider):
     # https://sz.ke.com/chengjiao/nanshanqu/pg2/
     name = "beike_all_area_of_chengjiao_by_city_2"
-    allowed_domains = ["bj.ke.com"]
-    start_urls = ['https://bj.ke.com']
+    allowed_domains = ["cd.ke.com"]
+    start_urls = ['https://cd.ke.com']
 
     def start_requests(self):
         # 武汉二手房：https://wh.ke.com/chengjiao/pg2/
@@ -36,10 +36,10 @@ class WeatherSpider(scrapy.Spider):
                     for y_index in range(0, len(y_list)):
                         for lc_index in range(0, len(lc_list)):
                             tiaojian = p_list[p_index] + a_list[a_index] + y_list[y_index] + lc_list[lc_index]
-                            url = self.start_urls[0] + area_i + "pg1" + tiaojian
+                            url = self.start_urls[0] + area_i + "pg1" + tiaojian + '/'
                             # print(url)
                             yield scrapy.Request(url=url, callback=self.parse_b,
-                                                 meta={'tiaojian': tiaojian, 'proxy': proxy_ip})
+                                                 meta={'tiaojian': tiaojian, 'proxy': proxy_ip}, dont_filter=True)
 
 
 
@@ -58,10 +58,10 @@ class WeatherSpider(scrapy.Spider):
                 if total_page > 101:
                     total_page = 101
                 for i in range(total_page - 1, -1, -1):
-                    url = self.start_urls[0] + areaname + "pg" + str(i)
+                    url = self.start_urls[0] + areaname + "pg" + str(i) + '/'
                     print("请求url:" + url)
                     # time.sleep(0.5)
-                    yield scrapy.Request(url=url, callback=self.parse_first, meta={'proxy': proxy_ip})
+                    yield scrapy.Request(url=url, callback=self.parse_first, meta={'proxy': proxy_ip}, dont_filter=True)
 
 
     def parse_first(self, response):
@@ -104,44 +104,3 @@ class WeatherSpider(scrapy.Spider):
 
                 yield item
 
-
-
-
-def getId(a):
-    if a:
-        end_index = a.find('.html')
-        start_index = a.find('chengjiao') + len('chengjiao/')
-        if end_index > start_index:
-            b = str(a)[start_index: end_index]
-            return b
-        else:
-            return a
-    else:
-        return a
-
-
-def getXiaquName(community_name):
-    if community_name:
-        end_index = community_name.find(' ')
-        xiaoqu_name = community_name[0:end_index]
-        return xiaoqu_name
-    else:
-        return ''
-
-
-def getAge(a):
-    # a = ' 高楼层(共9层) 1998年建板楼 '
-    a = a.replace(' ', '').replace('\n', '')
-    start_index = a.find(')')
-    if start_index > 0:
-        end_index = start_index + 5
-        b = str(a)[start_index + 1:end_index]
-        return b
-    else:
-        return ''
-
-
-def time_mk(time):
-    if str(time).__contains__('.'):
-        a = str(time).replace('.', '-')
-        return a

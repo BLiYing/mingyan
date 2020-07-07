@@ -5,6 +5,7 @@
 # See documentation in:
 # https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 import base64
+import logging
 import random
 
 from scrapy import signals
@@ -36,13 +37,15 @@ class MingyanSpiderMiddleware:
     def process_request(self, request, spider):
         # ip = random.choice(self.ip)
         get_ip = GetIP()
-        ip = get_ip.get_random_ip_from_mysql()
-        # ip = get_ip.get_random_ip_from_redis()
+        # ip = get_ip.get_random_ip_from_mysql()
+        ip = get_ip.get_ip_from_xun()
 
-        print("this is request ip:" + ip)
+        print("this is request ip:" + str(ip))
+        auth = get_ip.get_auth()
+        # encoded_user_pass = base64.encodestring(auth)
+        request.headers['Proxy-Authorization'] = auth
+        logging.info('#####################################################################' + f"Proxy-Authorization:{auth}")
         request.meta['proxy'] = ip
-        # request.meta['max_retry_times'] = 2
-
 
     def process_spider_input(self, response, spider):
         # Called for each response that goes through the spider
@@ -103,6 +106,7 @@ class MingyanDownloaderMiddleware:
         # - or return a Request object
         # - or raise IgnoreRequest: process_exception() methods of
         #   installed downloader middleware will be called
+
         user_agent = random.choice(USER_AGENT_LIST)
         if user_agent:
             request.headers.setdefault('User-Agent', user_agent)
@@ -118,11 +122,17 @@ class MingyanDownloaderMiddleware:
         # - or raise IgnoreRequest
 
         # 请求失败不等于200
-        # if response.status != 200:
-        #     ip = random.choice(self.ip)
-        #     print("this is new request ip:" + ip)
-        #     request.meta['proxy'] = ip
-        #     return request
+        if response.status != 200:
+            logging.info('--------------------------------------response.status: ' + str(response.status))
+            get_ip = GetIP()
+            ip = get_ip.get_ip_from_xun()
+            print("this is request ip:" + str(ip))
+            auth = get_ip.get_auth()
+            request.headers['Proxy-Authorization'] = auth
+
+            print(f"Proxy-Authorization:{auth}")
+            request.meta['proxy'] = ip
+            return request
         return response
 
     def process_exception(self, request, exception, spider):

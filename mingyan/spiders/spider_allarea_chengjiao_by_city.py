@@ -4,7 +4,7 @@ import scrapy
 # from test import time_mk
 from mingyan.util.minyanitem import getMinyanItem
 
-city_name = '北京'
+city_name = '西安'
 # tiaojian = ''
 p_list = ['p1', 'p2', 'p3', 'p4', 'p5', 'p6', 'p7']
 a_list = ['a1', 'a2', 'a3', 'a4', 'a5', 'a6', 'a7']
@@ -12,7 +12,7 @@ y_list = ['y4', 'y5']
 
 # 控制是否需要条件限制 False:遍历查找各区中[start_page ，end_page - 1]页的的数据 True:遍历查找符合条件的所有数据
 # 由于贝壳每个条件下最多3000条数据（30 * 100），因此超出部分无法统计
-tiaojian_is_not_noe = False
+tiaojian_is_not_noe = True
 start_page = 1
 end_page = 2
 
@@ -20,8 +20,8 @@ end_page = 2
 class WeatherSpider(scrapy.Spider):
     # https://sz.ke.com/chengjiao/nanshanqu/pg2/
     name = "beike_all_area_of_chengjiao_by_city"
-    allowed_domains = ["bj.ke.com"]
-    start_urls = ['https://bj.ke.com']
+    allowed_domains = ["xa.ke.com"]
+    start_urls = ['https://xa.ke.com']
 
     def start_requests(self):
         # 武汉二手房：https://wh.ke.com/chengjiao/pg2/
@@ -39,13 +39,13 @@ class WeatherSpider(scrapy.Spider):
                     for a_index in range(0, len(a_list)):
                         for y_index in range(0, len(y_list)):
                             tiaojian = p_list[p_index] + a_list[a_index] + y_list[y_index]
-                            url = self.start_urls[0] + area_i + "pg1" + tiaojian
+                            url = self.start_urls[0] + area_i + "pg1" + tiaojian + '/'
                             # print(url)
-                            yield scrapy.Request(url=url, callback=self.parse_b, meta={'tiaojian': tiaojian})
+                            yield scrapy.Request(url=url, callback=self.parse_b, meta={'tiaojian': tiaojian}, dont_filter=True)
             else:
                 url = self.start_urls[0] + area_i + "pg1"
                 # print(url)
-                yield scrapy.Request(url=url, callback=self.parse_b)
+                yield scrapy.Request(url=url, callback=self.parse_b, dont_filter=True)
 
     def parse_b(self, response):
         # tiaojian = response.meta['tiaojian']
@@ -65,10 +65,10 @@ class WeatherSpider(scrapy.Spider):
                 if tiaojian_is_not_noe is False and total_page > end_page:
                     total_page = end_page
                 for i in range(start_page, total_page):
-                    url = self.start_urls[0] + areaname + "pg" + str(i)
+                    url = self.start_urls[0] + areaname + "pg" + str(i) + '/'
                     print("请求url:" + url)
                     # time.sleep(0.5)
-                    yield scrapy.Request(url=url, callback=self.parse_first)
+                    yield scrapy.Request(url=url, callback=self.parse_first, dont_filter=True)
 
     def parse_first(self, response):
 
@@ -111,41 +111,4 @@ class WeatherSpider(scrapy.Spider):
                 yield item
 
 
-def getId(a):
-    if a:
-        end_index = a.find('.html')
-        start_index = a.find('chengjiao') + len('chengjiao/')
-        if end_index > start_index:
-            b = str(a)[start_index: end_index]
-            return b
-        else:
-            return a
-    else:
-        return a
 
-
-def getXiaquName(community_name):
-    if community_name:
-        end_index = community_name.find(' ')
-        xiaoqu_name = community_name[0:end_index]
-        return xiaoqu_name
-    else:
-        return ''
-
-
-def getAge(a):
-    # a = ' 高楼层(共9层) 1998年建板楼 '
-    a = a.replace(' ', '').replace('\n', '')
-    start_index = a.find(')')
-    if start_index > 0:
-        end_index = start_index + 5
-        b = str(a)[start_index + 1:end_index]
-        return b
-    else:
-        return ''
-
-
-def time_mk(time):
-    if str(time).__contains__('.'):
-        a = str(time).replace('.', '-')
-        return a

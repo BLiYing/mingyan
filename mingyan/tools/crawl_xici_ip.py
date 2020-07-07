@@ -292,21 +292,28 @@ class GetIP(object):
 
         # print(auth)
         proxy = {"http": "http://" + ip_port, "https": "https://" + ip_port}
-        headers = {"Proxy-Authorization": self.get_auth(),
-                   "User-Agent": "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.75 Safari/537.36"}
-        r = requests.get("http://icanhazip.com", headers=headers, proxies=proxy, verify=False,
-                         allow_redirects=False)
-        r.encoding = 'utf8'
-        print(r.status_code)
-        print(r.text)
-        if r.status_code == 302 or r.status_code == 301:
-            loc = r.headers['Location']
-            print(loc)
-            r = requests.get(loc, headers=headers, proxies=proxy, verify=False, allow_redirects=False)
-            r.encoding = 'utf8'
-            print(r.status_code)
-            print(r.text)
-            return r.text
+        return "http://" + ip_port
+
+        # headers = {"Proxy-Authorization": self.get_auth(),
+        #            "User-Agent": "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.75 Safari/537.36"}
+        # r = requests.get("http://icanhazip.com/", headers=headers, proxies=proxy, verify=False,
+        #                  allow_redirects=False)
+        # r.encoding = 'utf8'
+        # print(r.status_code)
+        # if r.status_code == 200:
+        #     print('-----------------------------代理ip:' + r.text)
+        #     return "http://" + ip_port
+
+
+        # if r.status_code == 302 or r.status_code == 301:
+        #     loc = r.headers['Location']
+        #     print(loc)
+        #     r = requests.get(loc, headers=headers, proxies=proxy, verify=False, allow_redirects=False)
+        #     r.encoding = 'utf8'
+        #     print(r.status_code)
+        #     print(r.text)
+        #     return r.text
+
 
     def get_auth(self):
         urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
@@ -314,7 +321,7 @@ class GetIP(object):
 
         is_python3 = (_version[0] == 3)
 
-        orderno = "DT20206246022WPCmxP"
+        orderno = "ZF2020779657Ma45eu"
 
         timestamp = str(int(time.time()))
         string = ""

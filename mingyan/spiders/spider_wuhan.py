@@ -19,7 +19,7 @@ end_page = 2
 
 class WeatherSpider(scrapy.Spider):
     # https://sz.ke.com/chengjiao/nanshanqu/pg2/
-    name = "beike"
+    # name = "beike"
     allowed_domains = ["wh.ke.com"]
     start_urls = ['https://wh.ke.com/']
 

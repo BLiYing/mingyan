@@ -4,11 +4,11 @@ import scrapy
 # from test import time_mk
 from mingyan.util.minyanitem import getMinyanItem
 
-city_name = '南京'
+city_name = '大连'
 p_list = ['p1', 'p2', 'p3', 'p4', 'p5', 'p6', 'p7']
 a_list = ['a1', 'a2', 'a3', 'a4', 'a5', 'a6', 'a7']
 y_list = ['y4', 'y5']
-# lc_list = ['lc1', 'lc2', 'lc3', 'lc4', 'lc5']
+lc_list = ['lc1', 'lc2', 'lc3', 'lc4', 'lc5']
 proxy_ip = ''
 
 
@@ -34,8 +34,8 @@ class WeatherSpider(scrapy.Spider):
             for p_index in range(0, len(p_list)):
                 for a_index in range(0, len(a_list)):
                     for y_index in range(0, len(y_list)):
-                        # for lc_index in range(0, len(lc_list)):
-                            tiaojian = p_list[p_index] + a_list[a_index] + y_list[y_index] #+ lc_list[lc_index]
+                        for lc_index in range(0, len(lc_list)):
+                            tiaojian = p_list[p_index] + a_list[a_index] + y_list[y_index] + lc_list[lc_index]
                             url = self.start_urls[0] + area_i + "pg1" + tiaojian + '/'
                             # print(url)
                             yield scrapy.Request(url=url, callback=self.parse_b,

@@ -13,6 +13,7 @@ from scrapy import signals
 from mingyan.settings import USER_AGENT_LIST
 from mingyan.tools.crawl_xici_ip import GetIP
 from mingyan.util.manager import get_random_proxy_from_redis
+from twisted.internet.error import TimeoutError
 
 
 class MingyanSpiderMiddleware:
@@ -40,7 +41,7 @@ class MingyanSpiderMiddleware:
         # ip = get_ip.get_random_ip_from_mysql()
         ip = get_ip.get_ip_from_xun()
 
-        print("this is request ip:" + str(ip))
+        logging.info("this is request ip:" + str(ip))
         auth = get_ip.get_auth()
         # encoded_user_pass = base64.encodestring(auth)
         request.headers['Proxy-Authorization'] = auth
@@ -110,7 +111,7 @@ class MingyanDownloaderMiddleware:
         user_agent = random.choice(USER_AGENT_LIST)
         if user_agent:
             request.headers.setdefault('User-Agent', user_agent)
-            print(f"User-Agent:{user_agent}")
+            # logging.info(f"User-Agent:{user_agent}")
         return None
 
     def process_response(self, request, response, spider):
@@ -126,11 +127,9 @@ class MingyanDownloaderMiddleware:
             logging.info('--------------------------------------response.status: ' + str(response.status))
             get_ip = GetIP()
             ip = get_ip.get_ip_from_xun()
-            print("this is request ip:" + str(ip))
             auth = get_ip.get_auth()
             request.headers['Proxy-Authorization'] = auth
-
-            print(f"Proxy-Authorization:{auth}")
+            logging.info(f"Proxy-Authorization:{auth}")
             request.meta['proxy'] = ip
             return request
         return response
@@ -143,6 +142,15 @@ class MingyanDownloaderMiddleware:
         # - return None: continue processing this exception
         # - return a Response object: stops process_exception() chain
         # - return a Request object: stops process_exception() chain
+        if isinstance(exception, TimeoutError):
+            logging.info('exception:******************************** TimeoutError')
+            get_ip = GetIP()
+            ip = get_ip.get_ip_from_xun()
+            auth = get_ip.get_auth()
+            request.headers['Proxy-Authorization'] = auth
+            logging.info(f"Proxy-Authorization:{auth}")
+            request.meta['proxy'] = ip
+            return request
         pass
 
     def spider_opened(self, spider):

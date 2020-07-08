@@ -4,19 +4,19 @@ import scrapy
 # from test import time_mk
 from mingyan.util.minyanitem import getMinyanItem
 
-city_name = '成都'
+city_name = '苏州'
 p_list = ['p1', 'p2', 'p3', 'p4', 'p5', 'p6', 'p7', 'p8']
 a_list = ['a1', 'a2', 'a3', 'a4', 'a5', 'a6', 'a7']
 y_list = ['y4', 'y5']
-lc_list = ['lc1', 'lc2', 'lc3', 'lc4', 'lc5']
+# lc_list = ['lc1', 'lc2', 'lc3', 'lc4', 'lc5']
 proxy_ip = ''
 
 
 class WeatherSpider(scrapy.Spider):
     # https://sz.ke.com/chengjiao/nanshanqu/pg2/
     name = "beike_all_area_of_chengjiao_by_city_2"
-    allowed_domains = ["cd.ke.com"]
-    start_urls = ['https://cd.ke.com']
+    allowed_domains = ["su.ke.com"]
+    start_urls = ['https://su.ke.com']
 
     def start_requests(self):
         # 武汉二手房：https://wh.ke.com/chengjiao/pg2/
@@ -29,19 +29,17 @@ class WeatherSpider(scrapy.Spider):
 
         for j in range(len(select_area_href_list_first) - 1, -1, -1):
             area_i = select_area_href_list_first[j]
-            #if str(area_i).__contains__('chaoyang'):
+            # if str(area_i).__contains__('chaoyang'):
 
             for p_index in range(0, len(p_list)):
                 for a_index in range(0, len(a_list)):
                     for y_index in range(0, len(y_list)):
-                        for lc_index in range(0, len(lc_list)):
-                            tiaojian = p_list[p_index] + a_list[a_index] + y_list[y_index] + lc_list[lc_index]
+                        # for lc_index in range(0, len(lc_list)):
+                            tiaojian = p_list[p_index] + a_list[a_index] + y_list[y_index] #+ lc_list[lc_index]
                             url = self.start_urls[0] + area_i + "pg1" + tiaojian + '/'
                             # print(url)
                             yield scrapy.Request(url=url, callback=self.parse_b,
                                                  meta={'tiaojian': tiaojian, 'proxy': proxy_ip}, dont_filter=True)
-
-
 
     def parse_b(self, response):
         total_num = response.xpath(
@@ -53,7 +51,7 @@ class WeatherSpider(scrapy.Spider):
             areaname = select_area_list[0]
             # areaname = areaname.replace(' ', '').replace('\n', '')
             if int(total_num) > 0:
-                num_avg = int(int(total_num)/30)
+                num_avg = int(int(total_num) / 30)
                 total_page = num_avg + 2
                 if total_page > 101:
                     total_page = 101
@@ -68,7 +66,7 @@ class WeatherSpider(scrapy.Spider):
 
         select_area_list = response.xpath(
             '//*[@data-role="ershoufang"]/div[1]/a[@class="selected CLICKDATA"]/text()').extract()
-        if  isinstance(select_area_list, list) and len(select_area_list) == 1:
+        if isinstance(select_area_list, list) and len(select_area_list) == 1:
             area = select_area_list[0]
             # area = area.replace(' ', '').replace('\n', '')
 
@@ -103,4 +101,3 @@ class WeatherSpider(scrapy.Spider):
                                      Listdealcycle_date, ListHouseAge, flag, area, city_name)
 
                 yield item
-

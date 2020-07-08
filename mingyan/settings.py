@@ -41,8 +41,8 @@ AUTOTHROTTLE_DEBUG = True
 # See also autothrottle settings and docs
 DOWNLOAD_DELAY = 0
 # The download delay setting will honor only one of: 域名 或ip 并发数
-CONCURRENT_REQUESTS_PER_DOMAIN = 32
-CONCURRENT_REQUESTS_PER_IP = 16
+# CONCURRENT_REQUESTS_PER_DOMAIN = 32
+CONCURRENT_REQUESTS_PER_IP = 32
 
 # Disable cookies (enabled by default)
 COOKIES_ENABLED = False

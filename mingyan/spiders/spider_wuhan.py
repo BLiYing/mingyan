@@ -13,20 +13,20 @@ city_name = '武汉'
 #根据面积查找 hanyang/a3a4a5a6a7/ https://wh.ke.com/chengjiao/qingshan/
 tiaojian = ''
 start_page = 1
-end_page = 16
+end_page = 2
 
 
 
 class WeatherSpider(scrapy.Spider):
     # https://sz.ke.com/chengjiao/nanshanqu/pg2/
-    # name = "beike"
+    name = "beike"
     allowed_domains = ["wh.ke.com"]
     start_urls = ['https://wh.ke.com/']
 
     def start_requests(self):
         arealist = ['jiangan', 'jianghan', 'qiaokou', 'dongxihu', 'wuchang', 'qingshan', 'hongshan', 'donghugaoxin',
                     'jiangxia', 'caidian', 'huangbei', 'xinzhou', 'zhuankoukaifaqu', 'hannan']
-        arealist = ['dongxihu', 'jiangxia', 'caidian', 'huangbei', 'xinzhou', 'zhuankoukaifaqu', 'hannan']
+        # arealist = ['dongxihu', 'jiangxia', 'caidian', 'huangbei', 'xinzhou', 'zhuankoukaifaqu', 'hannan']
         for area in arealist:
             for i in range(start_page, end_page):
                 #

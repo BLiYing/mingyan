@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d020a718-4295-4a6b-b9c3-a497fd5ebed7" name="Default Changelist" comment="完善代码">
+    <list default="true" id="d020a718-4295-4a6b-b9c3-a497fd5ebed7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_2.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mingyan/middlewares.py" beforeDir="false" afterPath="$PROJECT_DIR$/mingyan/middlewares.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mingyan/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/mingyan/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mingyan/spiders/spider_allarea_chengjiao_by_city.py" beforeDir="false" afterPath="$PROJECT_DIR$/mingyan/spiders/spider_allarea_chengjiao_by_city.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mingyan/spiders/spider_allarea_chengjiao_by_city_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/mingyan/spiders/spider_allarea_chengjiao_by_city_2.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mingyan/spiders/spider_wuhan.py" beforeDir="false" afterPath="$PROJECT_DIR$/mingyan/spiders/spider_wuhan.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mingyan/tools/crawl_xici_ip.py" beforeDir="false" afterPath="$PROJECT_DIR$/mingyan/tools/crawl_xici_ip.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -19,7 +17,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/mingyan$main.coverage" NAME="main Coverage Results" MODIFIED="1594126173298" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/mingyan" />
+    <SUITE FILE_PATH="coverage/mingyan$main.coverage" NAME="main Coverage Results" MODIFIED="1594179395573" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/mingyan" />
     <SUITE FILE_PATH="coverage/mingyan$main_1.coverage" NAME="main_3 Coverage Results" MODIFIED="1593318390817" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/mingyan$main_4.coverage" NAME="main_4 Coverage Results" MODIFIED="1593318298754" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/mingyan$GetIp.coverage" NAME="GetIp Coverage Results" MODIFIED="1591599099737" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
@@ -85,7 +83,7 @@
           <entry key="log" value="7" />
           <entry key="md" value="1" />
           <entry key="png" value="1" />
-          <entry key="py" value="197" />
+          <entry key="py" value="201" />
           <entry key="sql" value="3" />
           <entry key="state" value="1" />
           <entry key="txt" value="6" />
@@ -100,7 +98,7 @@
           <entry key="JSON" value="46" />
           <entry key="Markdown" value="1" />
           <entry key="PLAIN_TEXT" value="15" />
-          <entry key="Python" value="197" />
+          <entry key="Python" value="201" />
           <entry key="Scratch" value="3" />
         </counts>
       </usages-collector>
@@ -109,15 +107,15 @@
           <entry key="dummy" value="43" />
           <entry key="log" value="3" />
           <entry key="md" value="9" />
-          <entry key="py" value="13835" />
-          <entry key="txt" value="306" />
+          <entry key="py" value="14150" />
+          <entry key="txt" value="317" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Markdown" value="9" />
-          <entry key="PLAIN_TEXT" value="352" />
-          <entry key="Python" value="13830" />
+          <entry key="PLAIN_TEXT" value="363" />
+          <entry key="Python" value="14145" />
           <entry key="SQL" value="5" />
         </counts>
       </usages-collector>
@@ -130,11 +128,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mingyan/spiders/spider_allarea_chengjiao_by_city_2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="25" column="32" lean-forward="true" selection-start-line="25" selection-start-column="32" selection-end-line="25" selection-end-column="32" />
+            <state relative-caret-position="574">
+              <caret line="60" column="27" selection-start-line="60" selection-start-column="27" selection-end-line="60" selection-end-column="27" />
+              <folding>
+                <marker date="1594178690053" expanded="true" signature="1792:1801" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -151,8 +152,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mingyan/middlewares.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="206">
-              <caret line="125" column="79" lean-forward="true" selection-start-line="125" selection-start-column="64" selection-end-line="125" selection-end-column="79" />
+            <state relative-caret-position="216">
+              <caret line="145" column="81" selection-start-line="145" selection-start-column="81" selection-end-line="145" selection-end-column="81" />
               <folding>
                 <element signature="e#169#182#0" expanded="true" />
               </folding>
@@ -161,13 +162,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mingyan/tools/crawl_xici_ip.py">
+        <entry file="file://$USER_HOME$/Library/Caches/PyCharm2018.2/python_stubs/-1199943126/builtins.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret line="317" column="8" selection-start-line="317" selection-start-column="8" selection-end-line="317" selection-end-column="8" />
-              <folding>
-                <element signature="e#15#29#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="303">
+              <caret line="885" column="4" selection-start-line="885" selection-start-column="4" selection-end-line="885" selection-end-column="4" />
             </state>
           </provider>
         </entry>
@@ -175,8 +173,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mingyan/spiders/spider_allarea_chengjiao_by_city.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="407">
-              <caret line="30" selection-start-line="30" selection-end-line="30" />
+            <state relative-caret-position="209">
+              <caret line="23" column="38" lean-forward="true" selection-start-line="23" selection-start-column="38" selection-end-line="23" selection-end-column="38" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -187,20 +185,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file:///usr/local/lib/python3.7/site-packages/scrapy/core/downloader/middleware.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1">
+            <state relative-caret-position="244">
               <caret line="43" selection-start-line="43" selection-end-line="43" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mingyan/MysqlUtil.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="760">
-              <caret line="223" selection-start-line="223" selection-end-line="224" />
-              <folding>
-                <element signature="e#19#34#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -208,17 +194,39 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" column="18" lean-forward="true" selection-start-line="4" selection-start-column="18" selection-end-line="4" selection-end-column="18" />
+            <state relative-caret-position="180">
+              <caret line="12" column="9" lean-forward="true" selection-start-line="12" selection-start-column="9" selection-end-line="12" selection-end-column="9" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/mingyan/settings.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="224">
+              <caret line="30" column="13" lean-forward="true" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mingyan/settings.py">
+        <entry file="file:///usr/local/lib/python3.7/site-packages/scrapy/core/downloader/handlers/http11.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="251">
-              <caret line="43" column="35" lean-forward="true" selection-start-line="43" selection-start-column="35" selection-end-line="43" selection-end-column="35" />
+            <state relative-caret-position="286">
+              <caret line="367" selection-start-line="367" selection-end-line="367" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mingyan/spiders/spider_wuhan.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="330">
+              <caret line="22" column="35" lean-forward="true" selection-start-line="22" selection-start-column="35" selection-end-line="22" selection-end-column="35" />
+              <folding>
+                <element signature="e#0#16#0" expanded="true" />
+                <marker date="1594179395566" expanded="true" signature="895:907" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -235,11 +243,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>chengjiao_unitPrice</find>
-      <find>chengjiao_totalPrice</find>
-      <find>101106135896</find>
-      <find>MingyanPipeline</find>
-      <find>judge_ip_from_redis</find>
       <find>http://127.0.0.1:5555/random</find>
       <find>Decimal</find>
       <find>MONGO_DATABASE</find>
@@ -261,10 +264,15 @@
       <find>response.status</find>
       <find>Proxy-Authorization</find>
       <find>0416</find>
-      <find>Request</find>
-      <find>Authorization</find>
       <find>897C1BB511A1E89EC49524B6D1E3027E&amp;orderno=ZF2020779657Ma45eu&amp;timestamp=1594131757</find>
+      <find>FD39869A97</find>
+      <find>D7C0D4EFC9148E5B125E5</find>
+      <find>https://xa.ke.com/chengjiao/beilin/y4a3p2pg1/</find>
+      <find>exception</find>
+      <find>Authorization</find>
+      <find>https://xa.ke.com/chengjiao/lianhu/pg1p2a6y5</find>
       <find>REDIRECT_ENABLED</find>
+      <find>Request</find>
     </findStrings>
     <replaceStrings>
       <replace>114.55.95.112:8999</replace>
@@ -321,14 +329,15 @@
         <option value="$PROJECT_DIR$/mingyan/spiders/spider_allarea_chengjiao_by_city_3.py" />
         <option value="$PROJECT_DIR$/mingyan/tools/crawl_xici_ip.py" />
         <option value="$PROJECT_DIR$/mingyan/spiders/spider_allarea_chengjiao_by_city_4.py" />
-        <option value="$PROJECT_DIR$/main.py" />
-        <option value="$PROJECT_DIR$/mingyan/spiders/spider_allarea_chengjiao_by_city_2.py" />
-        <option value="$PROJECT_DIR$/mingyan/spiders/spider_wuhan.py" />
         <option value="/usr/local/lib/python3.7/site-packages/scrapy/core/downloader/handlers/http11.py" />
-        <option value="$PROJECT_DIR$/mingyan/middlewares.py" />
         <option value="$PROJECT_DIR$/main_2.py" />
-        <option value="$PROJECT_DIR$/mingyan/spiders/spider_allarea_chengjiao_by_city.py" />
+        <option value="$PROJECT_DIR$/mingyan/middlewares.py" />
         <option value="$PROJECT_DIR$/mingyan/settings.py" />
+        <option value="$PROJECT_DIR$/mingyan/spiders/spider_allarea_chengjiao_by_city_2_save.py" />
+        <option value="$PROJECT_DIR$/mingyan/spiders/spider_allarea_chengjiao_by_city_2.py" />
+        <option value="$PROJECT_DIR$/mingyan/spiders/spider_allarea_chengjiao_by_city.py" />
+        <option value="$PROJECT_DIR$/main.py" />
+        <option value="$PROJECT_DIR$/mingyan/spiders/spider_wuhan.py" />
       </list>
     </option>
   </component>
@@ -534,7 +543,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.main_2">
+  <component name="RunManager" selected="Python.main">
     <configuration name="crawl_xici_ip" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="mingyan" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -654,8 +663,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.main_2" />
         <item itemvalue="Python.main" />
+        <item itemvalue="Python.main_2" />
         <item itemvalue="Python.crawl_xici_ip" />
         <item itemvalue="Python.minyanitem" />
         <item itemvalue="Python.main_4" />
@@ -862,7 +871,14 @@
       <option name="project" value="LOCAL" />
       <updated>1594006050037</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="动态转发ip">
+      <created>1594144502303</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1594144502303</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TodoView">
@@ -883,7 +899,7 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32941177" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.4909091" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.4909091" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -958,7 +974,8 @@
     <MESSAGE value="数据库密码修改" />
     <MESSAGE value="北京" />
     <MESSAGE value="完善代码" />
-    <option name="LAST_COMMIT_MESSAGE" value="完善代码" />
+    <MESSAGE value="动态转发ip" />
+    <option name="LAST_COMMIT_MESSAGE" value="动态转发ip" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -985,12 +1002,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/mingyan/middlewares.py</url>
-          <line>124</line>
+          <line>125</line>
           <option name="timeStamp" value="493" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/mingyan/middlewares.py</url>
-          <line>126</line>
+          <line>127</line>
           <option name="timeStamp" value="494" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -1029,13 +1046,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file:///usr/local/lib/python3.7/site-packages/scrapy/cmdline.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="303">
-          <caret line="106" column="4" selection-start-line="106" selection-start-column="4" selection-end-line="106" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/mingyan/__init__.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -1164,13 +1174,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Library/Caches/PyCharm2018.2/python_stubs/-1199943126/builtins.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="303">
-          <caret line="70" column="4" selection-start-line="70" selection-start-column="4" selection-end-line="70" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///usr/local/lib/python3.7/site-packages/scrapy/http/request/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="271">
@@ -1217,17 +1220,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mingyan/spiders/spider_wuhan.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="22" column="20" lean-forward="true" selection-start-line="22" selection-start-column="20" selection-end-line="22" selection-end-column="20" />
-          <folding>
-            <element signature="e#0#16#0" expanded="true" />
-            <marker date="1594127493934" expanded="true" signature="896:908" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/mingyan/MysqlUtil.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="760">
@@ -1235,27 +1227,6 @@
           <folding>
             <element signature="e#19#34#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="18" lean-forward="true" selection-start-line="4" selection-start-column="18" selection-end-line="4" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/local/lib/python3.7/site-packages/scrapy/core/downloader/handlers/http11.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="341" column="34" selection-start-line="341" selection-start-column="22" selection-end-line="341" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/local/lib/python3.7/site-packages/scrapy/core/downloader/middleware.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1">
-          <caret line="43" selection-start-line="43" selection-end-line="43" />
         </state>
       </provider>
     </entry>
@@ -1276,37 +1247,86 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mingyan/spiders/spider_allarea_chengjiao_by_city.py">
+    <entry file="file:///usr/local/lib/python3.7/site-packages/scrapy/core/downloader/handlers/http11.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="407">
-          <caret line="30" selection-start-line="30" selection-end-line="30" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="286">
+          <caret line="367" selection-start-line="367" selection-end-line="367" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/lib/python3.7/site-packages/scrapy/core/downloader/middleware.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="244">
+          <caret line="43" selection-start-line="43" selection-end-line="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Library/Caches/PyCharm2018.2/python_stubs/-1199943126/builtins.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="303">
+          <caret line="885" column="4" selection-start-line="885" selection-start-column="4" selection-end-line="885" selection-end-column="4" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mingyan/middlewares.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="206">
-          <caret line="125" column="79" lean-forward="true" selection-start-line="125" selection-start-column="64" selection-end-line="125" selection-end-column="79" />
+        <state relative-caret-position="216">
+          <caret line="145" column="81" selection-start-line="145" selection-start-column="81" selection-end-line="145" selection-end-column="81" />
           <folding>
             <element signature="e#169#182#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mingyan/settings.py">
+    <entry file="file://$PROJECT_DIR$/mingyan/spiders/spider_allarea_chengjiao_by_city_2_save.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="251">
-          <caret line="43" column="35" lean-forward="true" selection-start-line="43" selection-start-column="35" selection-end-line="43" selection-end-column="35" />
+        <state relative-caret-position="349">
+          <caret line="40" column="79" selection-start-line="40" selection-start-column="79" selection-end-line="40" selection-end-column="79" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="9" lean-forward="true" selection-start-line="12" selection-start-column="9" selection-end-line="12" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mingyan/spiders/spider_allarea_chengjiao_by_city.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="23" column="38" lean-forward="true" selection-start-line="23" selection-start-column="38" selection-end-line="23" selection-end-column="38" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mingyan/spiders/spider_wuhan.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="22" column="35" lean-forward="true" selection-start-line="22" selection-start-column="35" selection-end-line="22" selection-end-column="35" />
+          <folding>
+            <element signature="e#0#16#0" expanded="true" />
+            <marker date="1594179395566" expanded="true" signature="895:907" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mingyan/spiders/spider_allarea_chengjiao_by_city_2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="25" column="32" lean-forward="true" selection-start-line="25" selection-start-column="32" selection-end-line="25" selection-end-column="32" />
+        <state relative-caret-position="574">
+          <caret line="60" column="27" selection-start-line="60" selection-start-column="27" selection-end-line="60" selection-end-column="27" />
+          <folding>
+            <marker date="1594178690053" expanded="true" signature="1792:1801" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mingyan/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="224">
+          <caret line="30" column="13" lean-forward="true" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
         </state>
       </provider>
     </entry>

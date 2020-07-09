@@ -4,15 +4,15 @@ import scrapy
 # from test import time_mk
 from mingyan.util.minyanitem import getMinyanItem
 
-city_name = '北京'
+city_name = '深圳'
 start_page = 1
 end_page = 8
 
 
 class WeatherSpider(scrapy.Spider):
-    name = "beike_1"
-    allowed_domains = ["bj.ke.com"]
-    start_urls = ['https://bj.ke.com']
+    name = "beike_4"
+    allowed_domains = ["sz.ke.com"]
+    start_urls = ['https://sz.ke.com']
 
     def start_requests(self):
         # 武汉二手房：https://wh.ke.com/chengjiao/pg2/

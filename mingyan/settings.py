@@ -27,7 +27,7 @@ FEED_EXPORT_ENCODING = 'UTF-8'
 CONCURRENT_REQUESTS = 100
 
 # # 智能限速/自动节流：AutoThrottle extension 开启True，默认False
-AUTOTHROTTLE_ENABLED = False
+AUTOTHROTTLE_ENABLED = True
 # # # # 起始的延迟
 AUTOTHROTTLE_START_DELAY = 5
 # # # 最大延迟
@@ -39,7 +39,7 @@ AUTOTHROTTLE_DEBUG = True
 # Configure a delay for requests for the same website (default: 0)
 # See https://docs.scrapy.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-DOWNLOAD_DELAY = 0
+DOWNLOAD_DELAY = 5
 # The download delay setting will honor only one of: 域名 或ip 并发数
 # CONCURRENT_REQUESTS_PER_DOMAIN = 32
 CONCURRENT_REQUESTS_PER_IP = 32
@@ -67,7 +67,7 @@ DOWNLOADER_MIDDLEWARES = {
 
     'scrapy.contrib.downloadermiddleware.useragent.UserAgentMiddleware': None,
     'mingyan.middlewares.MingyanDownloaderMiddleware': 543,
-    'mingyan.middlewares.MingyanSpiderMiddleware': 543,
+    # 'mingyan.middlewares.MingyanSpiderMiddleware': 543,
 
 
 }

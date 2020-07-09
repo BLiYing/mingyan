@@ -10,7 +10,7 @@ end_page = 8
 
 
 class WeatherSpider(scrapy.Spider):
-    name = "beike_sh"
+    name = "beike_2"
     allowed_domains = ["sh.ke.com"]
     start_urls = ['https://sh.ke.com']
 

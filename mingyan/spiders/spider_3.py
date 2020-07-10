@@ -30,11 +30,12 @@ class WeatherSpider(scrapy.Spider):
     def parse_b(self, response):
         select_area_list = response.xpath(
             '//*[@data-role="ershoufang"]/div[1]/a[@class="selected CLICKDATA"]/@href').extract()
-        areaname = select_area_list[0]
-        for i in range(start_page, end_page):
-            url = self.start_urls[0] + areaname + "pg" + str(i) + '/'
-            print("请求url:" + url)
-            yield scrapy.Request(url=url, callback=self.parse_first, dont_filter=True)
+        if isinstance(select_area_list, list) and len(select_area_list) == 1:
+            areaname = select_area_list[0]
+            for i in range(start_page, end_page):
+                url = self.start_urls[0] + areaname + "pg" + str(i) + '/'
+                print("请求url:" + url)
+                yield scrapy.Request(url=url, callback=self.parse_first, dont_filter=True)
 
     def parse_first(self, response):
         select_area_list = response.xpath(

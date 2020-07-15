@@ -35,6 +35,9 @@ def crawl():
     yield runner.crawl(mingyan.spiders.spider_13.WeatherSpider)
     yield runner.crawl(mingyan.spiders.spider_14.WeatherSpider)
     yield runner.crawl(mingyan.spiders.spider_15.WeatherSpider)
+    yield runner.crawl(mingyan.spiders.spider_16.WeatherSpider)
+    yield runner.crawl(mingyan.spiders.spider_17.WeatherSpider)
+    yield runner.crawl(mingyan.spiders.spider_18.WeatherSpider)
     reactor.stop()
 
 

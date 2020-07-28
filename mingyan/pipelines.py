@@ -43,9 +43,9 @@ class MingyanPipeline:
             self.__pool.end("commit")
             if count is not None and isinstance(count, tuple) and len(count) > 0 and count[0] > 0:
                 print("------------------------------更新area" + str(item['maidian_id']))
-                params_update = (item['area'], item['house_age'], item['chengjiao_unitPrice'], item['maidian_id'])
-                self.__pool.update(sql=sql_update, param=params_update)
-                self.__pool.end("commit")
+                # params_update = (item['area'], item['house_age'], item['chengjiao_unitPrice'], item['maidian_id'])
+                # self.__pool.update(sql=sql_update, param=params_update)
+                # self.__pool.end("commit")
 
             else:
                 print("------------------------------插入" + str(item['maidian_id']))

@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d020a718-4295-4a6b-b9c3-a497fd5ebed7" name="Default Changelist" comment="">
+    <list default="true" id="d020a718-4295-4a6b-b9c3-a497fd5ebed7" name="Default Changelist" comment="调整延时">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mingyan/pipelines.py" beforeDir="false" afterPath="$PROJECT_DIR$/mingyan/pipelines.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -12,7 +11,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/mingyan$main.coverage" NAME="main Coverage Results" MODIFIED="1595922928253" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/mingyan" />
+    <SUITE FILE_PATH="coverage/mingyan$main.coverage" NAME="main Coverage Results" MODIFIED="1595924552970" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/mingyan" />
     <SUITE FILE_PATH="coverage/mingyan$main_1.coverage" NAME="main_1 Coverage Results" MODIFIED="1594712726989" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/mingyan$main_4.coverage" NAME="main_4 Coverage Results" MODIFIED="1593318298754" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/mingyan$GetIp.coverage" NAME="GetIp Coverage Results" MODIFIED="1591599099737" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
@@ -103,15 +102,15 @@
           <entry key="dummy" value="43" />
           <entry key="log" value="3" />
           <entry key="md" value="9" />
-          <entry key="py" value="14711" />
-          <entry key="txt" value="397" />
+          <entry key="py" value="14717" />
+          <entry key="txt" value="408" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Markdown" value="9" />
-          <entry key="PLAIN_TEXT" value="443" />
-          <entry key="Python" value="14706" />
+          <entry key="PLAIN_TEXT" value="454" />
+          <entry key="Python" value="14712" />
           <entry key="SQL" value="5" />
         </counts>
       </usages-collector>
@@ -191,7 +190,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mingyan/pipelines.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="149">
+            <state relative-caret-position="135">
               <caret line="44" column="29" selection-start-line="44" selection-start-column="29" selection-end-line="44" selection-end-column="29" />
               <folding>
                 <element signature="e#194#208#0" expanded="true" />
@@ -212,8 +211,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/mingyan/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="57">
-              <caret line="26" column="25" lean-forward="true" selection-start-line="26" selection-start-column="25" selection-end-line="26" selection-end-column="25" />
+            <state relative-caret-position="404">
+              <caret line="41" column="18" lean-forward="true" selection-start-line="41" selection-start-column="18" selection-end-line="41" selection-end-column="18" />
             </state>
           </provider>
         </entry>
@@ -239,7 +238,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>beike_all_area_of_chengjiao_by_city_</find>
       <find>getHtm</find>
       <find>HTTPPROXY_AUTH_ENCODING</find>
       <find>x</find>
@@ -269,6 +267,7 @@
       <find>WeatherSpider</find>
       <find>Telnet</find>
       <find>logging</find>
+      <find>scrapy.spidermiddlewares.httperror.HttpErrorMiddleware</find>
     </findStrings>
     <replaceStrings>
       <replace>114.55.95.112:8999</replace>
@@ -929,7 +928,21 @@
       <option name="project" value="LOCAL" />
       <updated>1595921718725</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="调整延时">
+      <created>1595922954324</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1595922954324</updated>
+    </task>
+    <task id="LOCAL-00044" summary="调整延时">
+      <created>1595924536555</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1595924536555</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="TodoView">
@@ -943,14 +956,13 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="1027" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25457877" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32941177" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.4909091" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.4909091" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -959,7 +971,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.44171122" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="11" weight="0.47058824" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.47058824" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.32941177" />
       <window_info anchor="bottom" id="Database Console" order="13" weight="0.32941177" />
       <window_info anchor="bottom" id="SQL Generator" order="14" weight="0.32941177" />
@@ -1025,7 +1037,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="免费ip池不好用，暂时不用" />
     <MESSAGE value="end_page通过返回动态计算" />
     <MESSAGE value="讯代理试用" />
     <MESSAGE value="解析异常处理" />
@@ -1050,7 +1061,8 @@
     <MESSAGE value="顺序执行15个爬虫" />
     <MESSAGE value="新增东莞惠州长沙" />
     <MESSAGE value="更新提交数据库操作关闭" />
-    <option name="LAST_COMMIT_MESSAGE" value="更新提交数据库操作关闭" />
+    <MESSAGE value="调整延时" />
+    <option name="LAST_COMMIT_MESSAGE" value="调整延时" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1440,7 +1452,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/mingyan/pipelines.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="149">
+        <state relative-caret-position="135">
           <caret line="44" column="29" selection-start-line="44" selection-start-column="29" selection-end-line="44" selection-end-column="29" />
           <folding>
             <element signature="e#194#208#0" expanded="true" />
@@ -1450,8 +1462,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/mingyan/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="26" column="25" lean-forward="true" selection-start-line="26" selection-start-column="25" selection-end-line="26" selection-end-column="25" />
+        <state relative-caret-position="404">
+          <caret line="41" column="18" lean-forward="true" selection-start-line="41" selection-start-column="18" selection-end-line="41" selection-end-column="18" />
         </state>
       </provider>
     </entry>

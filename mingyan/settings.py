@@ -27,7 +27,7 @@ FEED_EXPORT_ENCODING = 'UTF-8'
 # CONCURRENT_REQUESTS = 100
 
 # # 智能限速/自动节流：AutoThrottle extension 开启True，默认False
-AUTOTHROTTLE_ENABLED = True
+AUTOTHROTTLE_ENABLED = False
 # # # # 起始的延迟
 AUTOTHROTTLE_START_DELAY = 6
 # # # 最大延迟

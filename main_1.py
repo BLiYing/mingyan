@@ -2,7 +2,7 @@
 
 from scrapy import cmdline
 
-# cmdline.execute('scrapy crawl beike'.split())
+# cmdline.execute('scrapy crawl beike_1 -o ./beike.json'.split())
 # cmdline.execute('scrapy crawl beike_b'.split())
 # cmdline.execute('scrapy crawl beike_all_area_of_wuhan'.split())
 

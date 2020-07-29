@@ -24,22 +24,22 @@ FEED_EXPORT_ENCODING = 'UTF-8'
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 # 并发
-# CONCURRENT_REQUESTS = 100
+CONCURRENT_REQUESTS = 16
 
 # # 智能限速/自动节流：AutoThrottle extension 开启True，默认False
-AUTOTHROTTLE_ENABLED = False
+AUTOTHROTTLE_ENABLED = True
 # # # # 起始的延迟
-AUTOTHROTTLE_START_DELAY = 6
+AUTOTHROTTLE_START_DELAY = 5
 # # # 最大延迟
 AUTOTHROTTLE_MAX_DELAY = 10
-AUTOTHROTTLE_TARGET_CONCURRENCY = 0.5
+AUTOTHROTTLE_TARGET_CONCURRENCY = 1
 AUTOTHROTTLE_DEBUG = True
 
 
 # Configure a delay for requests for the same website (default: 0)
 # See https://docs.scrapy.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-DOWNLOAD_DELAY = 6
+DOWNLOAD_DELAY = 10
 # The download delay setting will honor only one of: 域名 或ip 并发数
 # CONCURRENT_REQUESTS_PER_DOMAIN = 5
 # CONCURRENT_REQUESTS_PER_IP = 32

@@ -321,7 +321,7 @@ class GetIP(object):
 
         is_python3 = (_version[0] == 3)
 
-        orderno = "ZF2020779657Ma45eu"
+        orderno = "xxxx"
 
         timestamp = str(int(time.time()))
         string = ""
